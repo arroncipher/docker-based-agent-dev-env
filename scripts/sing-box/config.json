@@ -1,0 +1,124 @@
+{
+  "log": {
+    "level": "info",
+    "timestamp": true
+  },
+  "dns": {
+    "strategy": "ipv4_only",
+    "servers": [
+      {
+        "type": "https",
+        "tag": "remote",
+        "server": "1.1.1.1",
+        "server_port": 443,
+        "path": "/dns-query",
+        "detour": "http-proxy",
+        "domain_resolver": "direct-doh"
+      },
+      {
+        "type": "https",
+        "tag": "direct-doh",
+        "server": "223.5.5.5",
+        "server_port": 443,
+        "path": "/dns-query"
+      }
+    ],
+    "rules": [
+      {
+        "domain_suffix": [
+          "myhexin.com",
+          "qq.com"
+        ],
+        "server": "direct-doh"
+      }
+    ],
+    "final": "remote"
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "interface_name": "tun0",
+      "address": [
+        "172.19.0.1/30"
+      ],
+      "mtu": 1280,
+      "auto_route": true,
+      "route_exclude_address": [
+        "0.250.0.0/16",
+        "127.0.0.0/8",
+        "10.0.0.0/8",
+        "172.16.0.0/12",
+        "192.168.0.0/16",
+        "169.254.0.0/16",
+        "::1/128",
+        "fc00::/7",
+        "fe80::/10",
+        "2001::/16",
+        "2000::/3"
+      ],
+      "strict_route": true,
+      "stack": "system"
+    },
+    {
+      "type": "direct",
+      "tag": "dns-in",
+      "listen": "172.19.0.1",
+      "listen_port": 53,
+      "network": "udp"
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "http",
+      "tag": "http-proxy",
+      "server": "0.250.250.254",
+      "server_port": 7897,
+      "domain_resolver": "direct-doh"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    }
+  ],
+  "route": {
+    "auto_detect_interface": true,
+    "default_domain_resolver": "direct-doh",
+    "rules": [
+      {
+        "inbound": "dns-in",
+        "action": "hijack-dns"
+      },
+      {
+        "protocol": "dns",
+        "action": "hijack-dns"
+      },
+      {
+        "ip_cidr": [
+          "0.250.0.0/16",
+          "127.0.0.0/8",
+          "10.0.0.0/8",
+          "172.16.0.0/12",
+          "192.168.0.0/16",
+          "169.254.0.0/16",
+          "::1/128",
+          "fc00::/7",
+          "fe80::/10",
+          "2001::/16",
+          "2000::/3"
+        ],
+        "outbound": "direct"
+      },
+      {
+        "domain": [
+          "localhost",
+          "host.docker.internal",
+          "myhexin.com",
+          "qq.com"
+        ],
+        "outbound": "direct"
+      }
+    ],
+    "final": "http-proxy"
+  }
+}

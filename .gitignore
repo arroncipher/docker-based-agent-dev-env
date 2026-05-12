@@ -1,0 +1,4 @@
+.coding_agents/
+scripts/ssh/
+.claude/settings.local.json
+user_prompt

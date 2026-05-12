@@ -1,0 +1,47 @@
+# Coding Agent account container with sing-box gateway.
+# Variable values should come from an env file, for example:
+#   docker-compose --env-file compose/coding-agent/coding-agent.env \
+#     -f compose/coding-agent/docker-compose.sing-box.yml up -d
+# SSH is published by the gateway because the account container shares its
+# network namespace via network_mode: service:sing_box_gateway.
+#
+# sing-box config is loaded from $CODING_AGENT_SING_BOX_CONFIG_DIR
+# (required; set in coding-agent.env; tracked example: scripts/sing-box/config.json).
+
+services:
+  sing_box_gateway:
+    image: ${CODING_AGENT_SING_BOX_IMAGE:-ghcr.io/sagernet/sing-box:latest}
+    command: ["run", "-c", "/etc/sing-box/config.json"]
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - ${CODING_AGENT_SING_BOX_CONFIG_DIR:?set CODING_AGENT_SING_BOX_CONFIG_DIR}:/etc/sing-box
+    ports:
+      - "127.0.0.1:${CODING_AGENT_SSH_PORT:?set CODING_AGENT_SSH_PORT}:22"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+  coding_agent:
+    image: ${CODING_AGENT_IMAGE:-coding-agent-base:debian-bookworm}
+    user: arron
+    working_dir: /home/arron
+    network_mode: "service:sing_box_gateway"
+    depends_on:
+      - sing_box_gateway
+    volumes:
+      - ${CODING_AGENT_WORK_DIR:?set CODING_AGENT_WORK_DIR}:/data/work_dir
+      - ${CODING_AGENT_SSH_AUTHORIZED_KEYS:?set CODING_AGENT_SSH_AUTHORIZED_KEYS}:/home/arron/.ssh/authorized_keys:ro
+    environment:
+      TERM: xterm-256color
+      TZ: Asia/Singapore
+      LANG: zh_CN.UTF-8
+      LC_ALL: zh_CN.UTF-8
+      LANGUAGE: zh_CN:zh:en_US:en
+      HOME: /home/arron
+      CODING_AGENT_SSH_PORT: ${CODING_AGENT_SSH_PORT:?set CODING_AGENT_SSH_PORT}
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
