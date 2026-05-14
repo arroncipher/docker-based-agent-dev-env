@@ -171,6 +171,50 @@ AGENTS.md 和 CLAUDE.md 的 run notes 中加入行为测试结果指针。
 
 ## Spec 变更记录
 
+### v1.0.9 · 2026-05-14 · 新增 §3.12–§3.13 epistemology 规则
+
+**触发**：认识论 (epistemology) 框架下识别出两个独立的推理约束缺口，由用户主动分析提出。
+
+**变更**：
+- spec §3 新增 §3.12 `entity-binding`（每个关系型实体引用须绑定可验证维度；
+  触发条件用替换测试，维度列表为例示非规范）
+- spec §3 新增 §3.13 `inferential-validity`（结论须有前提/证据支撑；非演绎推理须
+  显式标注；禁止 6 类无效跃迁含 part→whole）
+- spec §9 追加 4 条对应 anti-patterns
+
+**处理方式**：spec v1.0.9 + `claude.rules.meta-rules.md.prompt` v1.0.3 →
+fresh-session replay + Phase G audit PASS (4122 chars / 4200 budget) →
+4 个 Claude 账号 promote（`de70d927…`，4162B 均一致）。
+
+**注意**：budget 余量仅 78 chars；下次规则新增前先评估是否需扩预算。
+
+---
+
+### v1.0.8 · 2026-05-14 · 新增 §3.9–§3.11 scope-control 规则
+
+**触发**：同一 badcase（abstraction-discipline.md）的同构分析，识别出三类
+边界缺口：框架应用门控、review/design 混同、扩展规则叠加效应。
+
+**变更**：
+- spec §3 新增 3 条 meta-rule（strength: hard, mode: verbatim）：
+  - §3.9 `framework-relevance`：框架仅在改变结论/区分/问题时应用；不自动授权下沉至机制层
+  - §3.10 `review-design-separation`：review 任务不得升级为 design 任务
+  - §3.11 `convergence-discipline`：扩展规则叠加时以任务类型/制品边界/决策层约束；否定边界不推正向范围
+- spec §9 anti-patterns 追加 4 条（§3.9–§3.11 对应失效模式）
+- spec §9 sub-rule range 更新至 §3.1–§3.11
+
+**处理方式**：spec v1.0.8 + `claude.rules.meta-rules.md.prompt` v1.0.2 →
+fresh-session replay + Phase G audit PASS (3258 chars / 4200 budget) →
+4 个 Claude 账号 promote（`3c3f266f…`，3296B 均一致）。
+
+**行为门控**：3 个场景待交互验证，见
+`runs/2026-05-14_behavior_meta-rules_v1.0.8/REPORT.md`。
+
+**暂缓**：`example-boundary`、`minimal-sufficient-answer`、
+`structure-first` 假设优先级；Codex prompts 下次模型升级重派生时自动覆盖。
+
+---
+
 ### v1.0.7 · 2026-05-14 · 新增 §3.8 abstraction-discipline
 
 **触发**：badcase `user_prompt/badcase/abstraction-discipline.md` — 评估制品时跨层

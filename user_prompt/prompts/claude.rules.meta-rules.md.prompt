@@ -2,8 +2,8 @@
 DERIVATION PROMPT · claude / user-level / rules/meta-rules.md
 ═══════════════════════════════════════════════════════════════════════
 
-prompt-version: 1.0.1
-spec-version-required: 1.0.7
+prompt-version: 1.0.3
+spec-version-required: 1.0.9
 target-file: ~/.claude/rules/meta-rules.md
 intended-model: claude-sonnet-4-6 (or equivalent capability)
 intended-temperature: 0
@@ -35,7 +35,7 @@ TARGET（输出目标）
 - file: ~/.claude/rules/meta-rules.md（Claude Code always-loaded rule）
 - audience: Claude Code agent 在会话启动时与 CLAUDE.md 一并加载
 - style: 简洁 Markdown；保留 spec 原文措辞；不得加入任何叙述性引言
-- length budget: 总字符数不超过 3000
+- length budget: 总字符数不超过 4200
 - frontmatter: **不得**包含 `paths:` 字段；本文件为常驻加载
 - structure（按此顺序，使用以下精确 H2 标题）：
   1. `## Meta-rules`
@@ -44,7 +44,7 @@ TARGET（输出目标）
 各节内容规则：
 
 - `## Meta-rules`
-  将 spec §3.1–§3.8 渲染为 8 个 H3 子节，标题精确为：
+  将 spec §3.1–§3.13 渲染为 13 个 H3 子节，标题精确为：
   - `### structure-first`
   - `### challenge-assumptions`
   - `### peer-level`
@@ -53,6 +53,11 @@ TARGET（输出目标）
   - `### concept-clarity`
   - `### assumption-expansion-right`
   - `### abstraction-discipline`
+  - `### framework-relevance`
+  - `### review-design-separation`
+  - `### convergence-discipline`
+  - `### entity-binding`
+  - `### inferential-validity`
   每个子节正文必须是对应子规则的逐字文本，字符级一致。
 
 - `## Thinking Frameworks`
@@ -74,6 +79,16 @@ VERBATIM LOCK（逐字锁定）
   `### assumption-expansion-right` 下
 - spec §3.8 (abstraction-discipline) — 置于
   `### abstraction-discipline` 下
+- spec §3.9 (framework-relevance) — 置于
+  `### framework-relevance` 下
+- spec §3.10 (review-design-separation) — 置于
+  `### review-design-separation` 下
+- spec §3.11 (convergence-discipline) — 置于
+  `### convergence-discipline` 下
+- spec §3.12 (entity-binding) — 置于
+  `### entity-binding` 下
+- spec §3.13 (inferential-validity) — 置于
+  `### inferential-validity` 下
 - spec §4 思维框架编号列表（5 项，中英双语，按 spec 给定顺序）
 - spec §4 引导句及末尾"禁止替换"说明
 
@@ -88,7 +103,7 @@ ANTI-PATTERNS（禁止出现于输出）
    theory), 认识论 (epistemology), 混沌系统 (chaos theory)。禁止用
    "first principles"、"control loops"、"information flow"、
    "incentives"、"organization" 或任何近义词替换。
-4. 遗漏 §3.1–§3.8 中的任意子规则（含 §3.8 abstraction-discipline）。
+4. 遗漏 §3.1–§3.13 中的任意子规则（含 §3.8–§3.13 新增规则）。
 5. 遗漏 §4 中的任意框架。
 6. 在文件开头加入 YAML frontmatter（`---` 块）。本文件为常驻 rule，
    无需 frontmatter。
@@ -104,14 +119,14 @@ SELF-CHECK（发出输出前在内部验证）
 发出最终文件前，在内部逐项验证以下内容。
 若任一项未通过，修改草稿并重新验证，直至全部通过。
 
-- [ ] spec §3 的全部 8 条子规则均出现在各自的 H3 标题下（§3.1
-      structure-first 至 §3.8 abstraction-discipline），正文与 spec 逐字一致。
+- [ ] spec §3 的全部 13 条子规则均出现在各自的 H3 标题下（§3.1
+      structure-first 至 §3.13 inferential-validity），正文与 spec 逐字一致。
 - [ ] spec §4 的全部 5 个框架均出现，各自带有中英双语形式，
       按 spec §4 所列顺序排列。
 - [ ] §4 结尾保留短语 "in derived targets"。
 - [ ] 文件以 `## Meta-rules` 开头（无 H1、无 frontmatter、无前言）。
 - [ ] 文件以 §4 末尾 "禁止替换" 说明的最后一行结尾，其后无任何附加文字。
-- [ ] 总长度不超过 3000 字符。
+- [ ] 总长度不超过 4200 字符。
 - [ ] 输出仅含 2 个 H2 节：`## Meta-rules`、`## Thinking Frameworks`。
 - [ ] 未使用任何文件工具（Read / Write / Edit）——输出以纯文本形式打印到 stdout。
 
