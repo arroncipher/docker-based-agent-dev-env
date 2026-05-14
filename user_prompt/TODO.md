@@ -394,7 +394,7 @@ path-scoped + slash-command 域拆分（见 D1–D3，留作后续优化）。
       - `runs/2026-05-14_claude.commands.market-data_G/` — PASS (733 chars / 1444B)
       - `runs/2026-05-14_claude.commands.education_G/` — PASS (749 chars / 1511B)
 
-### ~~D3. 部署~~ ✅ 文件部署完成 2026-05-14（行为门控待交互验证）
+### ~~D3. 部署~~ ✅ DONE 2026-05-14
 
 - [x] meta-rules / context / CLAUDE.md(thin) 走派生 pipeline 重出，覆盖 D0
       手写版本 ✅ 2026-05-14
@@ -402,11 +402,12 @@ path-scoped + slash-command 域拆分（见 D1–D3，留作后续优化）。
       - `.claude/rules/engineering.md` 1376B（4 账号 hash 一致 `2e33e590…`）
       - `.claude/commands/market-data.md` 1444B（hash `60e16d84…`）
       - `.claude/commands/education.md` 1511B（hash `83ea5a05…`）
-- [ ] 行为门控（需交互式验证，非自动化）：
-      - 触发：在 4 个账号分别打开匹配源码（如 `*.go` 文件），观察 agent
-        是否激活 engineering 上下文；输入 `/market-data` / `/education`
-        观察 slash command 是否加载并表现出对应工作模式
-      - 不干扰：在非工程对话与非教育会话中确认未自动注入域上下文
+- [x] 行为门控 ✅ PASS 2026-05-14（claude-sonnet-4-6, claude_max20 wrapper）
+      见 `runs/2026-05-14_behavior_D3_slash-commands/REPORT.md`：
+      - engineering rule 激活（cwd 含 .sh 文件）✓
+      - engineering rule 不干扰（cwd=/tmp）✓
+      - `/market-data` slash command 加载正确 ✓
+      - `/education` slash command 加载正确 ✓
 
 ---
 
