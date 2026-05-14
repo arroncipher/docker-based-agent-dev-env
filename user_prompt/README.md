@@ -34,6 +34,9 @@ spec 的每个节携带 `strength`（`hard` / `soft` / `preference`）和
 `challenge-assumptions`、`peer-level`、`no-default-hedging` 等 meta-rules 与 RLHF
 奖励模式（帮助性、认识论谨慎、解释完整性）方向相反。它们在模型版本更迭后需要重测。
 与安全训练同向的规则（hard constraints、诚实要求）在模型版本间保持稳定。
+scope-control 规则（§3.8–§3.11）和 epistemology 规则（§3.12–§3.13）同样逆训练先验：
+RLHF 奖励"更完整、更可操作的答案"，而这些规则要求主动收敛和停止展开；需在每次
+模型升级后重点验证。
 
 **6. 长度预算强制信号优先级。**
 对派生目标设置字符上限，迫使派生 prompt 压缩低信号内容、保留高信号规则。没有预算
@@ -285,6 +288,8 @@ user_prompt/
 ├── TODO.md                      # pipeline 执行历史 + 开放缺口
 ├── spec/
 │   └── arron.spec.md            # 单一真相源
+├── badcase/                     # 观察到的 drift 失效案例（触发 spec 修订）
+│   └── abstraction-discipline.md
 ├── prompts/                     # 每个派生目标对应一个 prompt
 │   ├── claude.CLAUDE.md.prompt
 │   ├── claude.rules.meta-rules.md.prompt
@@ -400,7 +405,7 @@ codex_plus.sh exec \
      `spec.snapshot.md` / `prompt.snapshot.md` / `notes.md`（model id、replay 方式、
      任何异常）。
 4. 跑 bash strength × mode audit（§3 结构门控）：
-   - §3 七条 meta-rule verbatim 匹配
+   - §3 全部 meta-rule verbatim 匹配（当前 13 条，§3.1–§3.13）
    - §4 五个框架中英双语全在
    - §7 hard constraints 子集全在
    - §9 drift token 0 命中（排除 §4 verbatim block 和 Anti-patterns section 本身）
@@ -504,14 +509,14 @@ runs/<date>_<target>/output.md  →  主账号  →  其他同类账号
 | 账号 | 部署目标路径 | 状态 |
 |---|---|---|
 | `claude_max20` | `.claude/CLAUDE.md` | ✅ spec 1.0.6（主账号） |
-| `claude_max20` | `.claude/rules/meta-rules.md` | ✅ spec 1.0.6（常驻） |
+| `claude_max20` | `.claude/rules/meta-rules.md` | ✅ spec 1.0.9（常驻，13 条 meta-rule） |
 | `claude_max20` | `.claude/rules/context.md` | ✅ spec 1.0.6（常驻） |
 | `claude_max20` | `.claude/rules/engineering.md` | ✅ spec 1.0.6（path-scoped） |
 | `claude_max20` | `.claude/commands/market-data.md` | ✅ spec 1.0.6 |
 | `claude_max20` | `.claude/commands/education.md` | ✅ spec 1.0.6 |
-| `claude_deepseek` | `.claude/CLAUDE.md` + rules/ + commands/ | ✅ spec 1.0.6（2026-05-14 同步） |
-| `claude_minimax` | `.claude/CLAUDE.md` + rules/ + commands/ | ✅ spec 1.0.6（2026-05-14 同步） |
-| `claude_pro` | `.claude/CLAUDE.md` + rules/ + commands/ | ✅ spec 1.0.6（2026-05-14 同步） |
+| `claude_deepseek` | `.claude/CLAUDE.md` + rules/ + commands/ | ✅ CLAUDE.md/context/engineering/commands: spec 1.0.6；meta-rules: spec 1.0.9 |
+| `claude_minimax` | `.claude/CLAUDE.md` + rules/ + commands/ | ✅ CLAUDE.md/context/engineering/commands: spec 1.0.6；meta-rules: spec 1.0.9 |
+| `claude_pro` | `.claude/CLAUDE.md` + rules/ + commands/ | ✅ CLAUDE.md/context/engineering/commands: spec 1.0.6；meta-rules: spec 1.0.9 |
 | `codex_plus` | `.codex/AGENTS.md` | ✅ spec 1.0.5（主账号，内容未受 1.0.6 影响） |
 | `codex_plus` | `.codex/profiles/engineering.md` | ✅ spec 1.0.5 |
 | `codex_plus` | `.codex/profiles/market-data.md` | ✅ spec 1.0.5 |
