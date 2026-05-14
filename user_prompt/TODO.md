@@ -477,6 +477,26 @@ SELF-CHECK 对应项，防止下次重现。见 `runs/2026-05-14_claude.CLAUDE.m
 
 ---
 
+## Phase H · Rules 目录清理 ✅ DONE 2026-05-14
+
+**问题**：4 个 Claude 账号 `.claude/rules/` 下各有 5 个无 `paths:` frontmatter 的
+备份文件（`*.handwritten-*`、`*.pre-*`），被 Claude Code 递归扫描并作为 always-loaded
+rules 注入每个会话，额外占用 ~13.5K chars context window。
+
+**修复**：将 5 个备份文件移至 `.claude/backups/`（`rules/` 之外），不被自动加载。
+4 个账号同步执行，`rules/` 现仅含 3 个有效文件：
+- `context.md`（always-loaded）
+- `meta-rules.md`（always-loaded）
+- `engineering.md`（path-scoped）
+
+**验证**：
+- 从 `/tmp` 运行新会话：加载 CLAUDE.md + context.md + meta-rules.md，无备份文件 ✓
+- 从工程目录运行新会话：加载 context.md + meta-rules.md，无备份文件 ✓
+
+**注意**：`rules/` 子目录会被 Claude Code 递归扫描（实测确认），故不能用 `rules/archive/`。
+
+---
+
 ## 不在本计划内的事
 
 - 不做 prompt 模板抽象（`prompts/_shared.md`）——5 份 prompt 抽象成本高于复制成本。
