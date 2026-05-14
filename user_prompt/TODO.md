@@ -566,6 +566,23 @@ deterministic 编译 → Phase G audit PASS (~2350 chars / 5000 budget) →
 
 ---
 
+### v1.0.12 · 2026-05-14 · 新增 §3.14 domain-grounding
+
+**触发**：诊断发现四条 meta-rules 联合作用导致 framework 词汇成为命名默认终点（framework-vocabulary bias）：thinking-frameworks 要求 + concept-clarity 偏向有教科书定义的术语 + precision 偏向正式定义 + peer-level 默认工程师视角；缺位：无规则要求将 reasoning 用的 framework 词汇转换为 domain 词汇。与 §3.8 abstraction-discipline 同类问题（reasoning 工具 ≠ output destination），§3.8 管纵向、§3.14 管横向。
+
+**变更**：
+- spec §3.14 `domain-grounding`（strength: hard, mode: verbatim）：思维框架与工程抽象是推理工具，不是命名终点；domain artifact 的最终命名/标签必须使用 domain 词汇；语域通过制品受众与用途识别（business domain / 工程抽象 / 纯分析三层）
+- spec §9 anti-patterns 追加对应失效模式；sub-rule range 升至 §3.1–§3.14
+
+**处理方式**：spec v1.0.12 + `claude.rules.meta-rules.md.prompt` v1.0.5 → 在会话内
+deterministic 编译 → Phase G audit PASS (~4250 chars / 5000 budget) →
+4 个 Claude 账号 promote（`0c65bd56…` 4560B 均一致）。
+
+**注意**：Codex profiles（§3.1–§3.7 scope）未更新——§3.8–§3.14 累积缺口，
+下次 Codex 重派生时统一覆盖。
+
+---
+
 ## 不在本计划内的事
 
 - 不做 prompt 模板抽象（`prompts/_shared.md`）——5 份 prompt 抽象成本高于复制成本。
