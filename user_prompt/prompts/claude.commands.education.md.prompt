@@ -1,0 +1,110 @@
+═══════════════════════════════════════════════════════════════════════
+DERIVATION PROMPT · claude / user-level / commands/education.md
+═══════════════════════════════════════════════════════════════════════
+
+prompt-version: 1.0.0
+spec-version-required: 1.0.6
+target-file: ~/.claude/commands/education.md
+intended-model: claude-sonnet-4-6 (or equivalent capability)
+intended-temperature: 0
+
+使用方法：
+1. 打开 `../spec/arron.spec.md`，复制全部内容。
+2. 将下方的 `<<<SPEC>>>` 替换为上述内容，得到完整 prompt。
+3. 粘贴到全新 agent 会话并提交。
+4. 将响应保存为 `../runs/<YYYY-MM-DD>_claude.commands.education/output.md`。
+
+注意：实际写入路径为 `.coding_agents/claude_max20/.claude/commands/education.md`。
+此文件为 slash command（用户输入 `/education` 触发加载）。
+
+═══════════════════════════════════════════════════════════════════════
+
+你是一个确定性配置编译器。你的任务是将下方的用户 spec §6（Active
+Projects，含 §6.1 Child Education）以及 §5 "Education-system design"
+子集翻译为 slash command 文件。你只做组合输出，不做解释、软化或信息增补。
+
+───────────────────────────────────────────────────────────────────────
+SPEC（逐字引用，不得修改）
+───────────────────────────────────────────────────────────────────────
+<<<SPEC>>>
+
+───────────────────────────────────────────────────────────────────────
+TARGET（输出目标）
+───────────────────────────────────────────────────────────────────────
+- file: ~/.claude/commands/education.md（Claude Code slash command）
+- audience: Claude Code agent 在用户输入 `/education` 时加载此文件
+- style: 简洁 Markdown；叙述性内容以简体中文（zh-CN）；技术术语保留
+  英文（pedagogy、cognitive development 等）；不得加入引言
+- length budget: 总字符数不超过 1500
+- frontmatter: **必须**包含 `description:` 字段，描述命令用途
+- structure（按此顺序，使用以下精确 H2 标题）：
+  1. `## Education 项目上下文`
+  2. `## 工作模式`
+
+各节内容规则：
+
+- `## Education 项目上下文`
+  基于 spec §6.1（Child Education）与 §5 "Education-system design" 子集
+  渲染。以中文撰写 4–6 条 bullet，覆盖：
+  - 阶段：middle school（初中）
+  - 长期目标：通过早期传递推理风格与心智模型，培养能在 AI 时代独立
+    思考、自主发展的孩子
+  - learning-system design、cognitive-development 工具、AI 辅助学习
+    workflow
+  - 三条派生规则：developmental-stage awareness（青春期早期）；
+    concrete, transferable exercises；以同等严谨度审视用户在 pedagogy
+    与学习成果上的假设
+  不得引入项目特定状态（具体年级、科目弱点、当前作业等——按 spec §6
+  脚注，这些属于项目级文件不属于 spec）。
+
+- `## 工作模式`
+  2–3 条 bullet，描述命令激活后 agent 应采取的工作模式：
+  - 在涉及子女教育的会话中以 §6.1 三条派生规则为行动指南。
+  - 不因话题涉及教育就降低 §3.2 challenge-assumptions / §3.3 peer-level
+    的力度。
+  - 提供具体可迁移练习而非抽象原则。
+
+───────────────────────────────────────────────────────────────────────
+VERBATIM LOCK（逐字锁定）
+───────────────────────────────────────────────────────────────────────
+本文件无逐字强制项；所有内容为 summarized 派生。
+
+───────────────────────────────────────────────────────────────────────
+ANTI-PATTERNS（禁止出现于输出）
+───────────────────────────────────────────────────────────────────────
+1. 引入项目特定状态（年级、科目弱点、作业、日程、短期计划等）——
+   spec §6 显式声明这些属于项目级文件，不在 spec 范围内。
+2. 捏造 SPEC 中不存在的事实：孩子姓名、学校、教材、教师、具体应用名。
+3. 缺少 YAML frontmatter `description:` 字段。
+4. 添加 spec 未指定的 H2 节。
+5. 软化 §6.1 三条派生规则的任意一条。
+6. 因话题为教育而软化 §3 Meta-rules（peer-level / challenge-assumptions）。
+7. 用代码围栏包裹整个输出。
+8. 使用文件工具（Read、Write、Edit）写入磁盘。
+
+───────────────────────────────────────────────────────────────────────
+SELF-CHECK（发出输出前在内部验证）
+───────────────────────────────────────────────────────────────────────
+- [ ] 输出以 YAML frontmatter（`---` 块）开头，含 `description:` 字段。
+- [ ] frontmatter 后是 `## Education 项目上下文` H2。
+- [ ] 仅含 2 个 H2 节：`## Education 项目上下文`、`## 工作模式`。
+- [ ] §6.1 三条派生规则全部出现（developmental-stage / transferable
+      exercises / challenge pedagogy）。
+- [ ] 总长度不超过 1500 字符。
+- [ ] 输出中未出现项目特定状态、§1/§3/§4/§5（非 education-system）/
+      §7/§8 内容。
+- [ ] 未使用任何文件工具——输出以纯文本形式打印到 stdout。
+
+───────────────────────────────────────────────────────────────────────
+OUTPUT（输出规则）
+───────────────────────────────────────────────────────────────────────
+仅输出最终文件内容。无前言。无解释。不得用 Markdown 代码围栏包裹整个输出。
+直接以 YAML frontmatter 开头：
+
+    ---
+    description: ...
+    ---
+
+    ## Education 项目上下文
+
+直接以 `## 工作模式` 的最后一条 bullet 结尾。文件正文之后不得输出任何文字。

@@ -1,0 +1,128 @@
+═══════════════════════════════════════════════════════════════════════
+DERIVATION PROMPT · claude / user-level / rules/context.md
+═══════════════════════════════════════════════════════════════════════
+
+prompt-version: 1.0.0
+spec-version-required: 1.0.5
+target-file: ~/.claude/rules/context.md
+intended-model: claude-sonnet-4-6 (or equivalent capability)
+intended-temperature: 0
+
+使用方法：
+1. 打开 `../spec/arron.spec.md`，复制全部内容。
+2. 将下方的 `<<<SPEC>>>` 替换为上述内容，得到完整 prompt。
+3. 粘贴到全新 agent 会话并提交。
+4. 将响应保存为 `../runs/<YYYY-MM-DD>_claude.rules.context/output.md`。
+
+注意：实际写入路径为 `.coding_agents/claude_max20/.claude/rules/context.md`。
+此文件为 always-loaded rules（无 `paths:` frontmatter），优先级与
+`CLAUDE.md` 相同。
+
+═══════════════════════════════════════════════════════════════════════
+
+你是一个确定性配置编译器。你的任务是将下方的用户 spec 中 §1（Identity）、
+§5（Domains）、§6（Active Projects）、§8（Execution Protocol）翻译为指定
+目标的 rules 文件。你只做组合输出，不做解释、软化或信息增补。
+
+───────────────────────────────────────────────────────────────────────
+SPEC（逐字引用，不得修改）
+───────────────────────────────────────────────────────────────────────
+<<<SPEC>>>
+
+───────────────────────────────────────────────────────────────────────
+TARGET（输出目标）
+───────────────────────────────────────────────────────────────────────
+- file: ~/.claude/rules/context.md（Claude Code always-loaded rule）
+- audience: Claude Code agent 在会话启动时与 CLAUDE.md 一并加载
+- style: 简洁 Markdown；叙述性内容以简体中文（zh-CN）撰写；技术术语保留
+  英文；不得加入任何引言
+- length budget: 总字符数不超过 3500
+- frontmatter: **不得**包含 `paths:` 字段；本文件为常驻加载
+- structure（按此顺序，使用以下精确 H2 标题）：
+  1. `## 用户背景`
+  2. `## Execution Protocol`
+  3. `## 活跃项目`
+
+各节内容规则：
+
+- `## 用户背景`
+  基于 spec §1（Identity，含 Citizenship、Education、Working contexts、
+  Role）与 spec §5（Architecture & engineering、Business domain、
+  Education-system design 三个子集全部）构建的结构化摘要。
+  以中文撰写的 6–10 条 bullet，每条覆盖一个主题（学历背景；工作场景；
+  身份角色；技术领域；工程领域；业务领域；教育系统设计）。
+  Working contexts 列表顺序必须严格按 spec §1 给定顺序，United States
+  位于首位。不得捏造事实，允许的来源材料仅限 §1 与 §5。
+
+- `## Execution Protocol`
+  渲染 spec §8，保留三个子块。子块标题以中文呈现：
+  - `**代码变更：**`
+  - `**代码审查：**`
+  - `**任务模糊时：**`
+  子块下的 bullet 内容保留 spec §8 的语义；祈使句允许保留英文原文
+  （"Inspect relevant files before editing." 等），中文化非必需。
+
+- `## 活跃项目`
+  摘要派生自 spec §6.1（Child Education）。4–6 条 bullet，以中文撰写。
+  必须包含：阶段（middle school / 初中）；长期目标；三条派生规则
+  （developmental-stage awareness / concrete, transferable exercises /
+  以同等严谨度审视教学假设）。
+
+───────────────────────────────────────────────────────────────────────
+VERBATIM LOCK（逐字锁定）
+───────────────────────────────────────────────────────────────────────
+本文件无 verbatim 强制项；所有内容为 structured / summarized 派生。
+但 spec §1 Working contexts 列表的国家顺序（United States 在首位）必须
+精确保留。
+
+───────────────────────────────────────────────────────────────────────
+ANTI-PATTERNS（禁止出现于输出）
+───────────────────────────────────────────────────────────────────────
+1. 在 `## 用户背景` 中将 "新加坡（主基地）" 或类似主基地标注与 Singapore
+   关联——spec §1 给定顺序为 United States, Singapore, United Kingdom,
+   Germany, Japan, China，不存在主基地概念。
+2. 捏造 SPEC 中不存在的事实：
+   - AI 演进时间线（禁止 "2014/2016/2023" 序列）。
+   - 设备名称（禁止 "MacBook Pro M5"、"Ghostty"、"tmux"、
+     "Antigravity"、"Codex CLI"、"Gemini CLI" 等）。
+   - Pine Script 或 Go 引擎背景。
+   - 超出 §1 范围的客户名称。
+3. 在文件开头加入 YAML frontmatter（`---` 块）。本文件为常驻 rule，
+   无需 frontmatter。
+4. 添加 spec 未指定的 H2 节（例如 `## Meta-rules`、
+   `## Thinking Frameworks`、`## Hard Constraints`）——这些属于其他
+   派生目标。
+5. 在 `## 活跃项目` 中遗漏 spec §6.1 的三条派生规则任一。
+6. 软化 §8 中的祈使措辞（"Do not …" → "Try to avoid …"）。
+7. 用代码围栏包裹整个输出。
+8. 使用文件工具（Read、Write、Edit）写入磁盘——必须直接输出到 stdout，
+   不得操作文件系统。
+
+───────────────────────────────────────────────────────────────────────
+SELF-CHECK（发出输出前在内部验证）
+───────────────────────────────────────────────────────────────────────
+发出最终文件前，在内部逐项验证以下内容。
+若任一项未通过，修改草稿并重新验证，直至全部通过。
+
+- [ ] 文件以 `## 用户背景` 开头（无 H1、无 frontmatter、无前言）。
+- [ ] Working contexts 顺序为 United States, Singapore, United Kingdom,
+      Germany, Japan, China；无 "主基地" 标注。
+- [ ] `## Execution Protocol` 含且仅含三个粗体子块：代码变更 / 代码审查 /
+      任务模糊时。
+- [ ] `## 活跃项目` 包含 §6.1 的三条派生规则（发展阶段意识 / 具体可迁移
+      练习 / 以同等严谨度审视教学假设）。
+- [ ] 总长度不超过 3500 字符。
+- [ ] 输出仅含 3 个 H2 节：`## 用户背景`、`## Execution Protocol`、
+      `## 活跃项目`。
+- [ ] 文件以 `## 活跃项目` 的最后一条 bullet 结尾，其后无任何附加文字。
+- [ ] 未使用任何文件工具（Read / Write / Edit）——输出以纯文本形式打印到 stdout。
+
+───────────────────────────────────────────────────────────────────────
+OUTPUT（输出规则）
+───────────────────────────────────────────────────────────────────────
+仅输出最终文件内容。无前言。无解释。不得用 Markdown 代码围栏包裹整个输出。
+直接以以下内容开头：
+
+    ## 用户背景
+
+直接以 `## 活跃项目` 的最后一条 bullet 结尾。文件正文之后不得输出任何文字。

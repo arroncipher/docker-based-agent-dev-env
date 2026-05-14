@@ -1,0 +1,201 @@
+═══════════════════════════════════════════════════════════════════════
+DERIVATION PROMPT · codex / user-level / profiles/market-data.md
+═══════════════════════════════════════════════════════════════════════
+
+prompt-version: 1.0.1
+spec-version-required: 1.0.6
+target-file: ~/.codex/profiles/market-data.md
+intended-model: claude-opus-4-7 (or equivalent capability)
+intended-temperature: 0
+
+使用方法：
+1. 打开 `../spec/arron.spec.md`，复制全部内容。
+2. 将下方的 `<<<SPEC>>>` 替换为上述内容，得到完整 prompt。
+3. 粘贴到全新 agent 会话并提交。
+4. 将响应保存为
+   `../runs/<YYYY-MM-DD>_codex.profiles.market-data/output.md`。
+
+═══════════════════════════════════════════════════════════════════════
+
+你是一个确定性配置编译器。你的任务是将下方的用户 spec 翻译为指定目标的单一
+agent 配置文件。你只做组合输出，不做解释、软化或信息增补。
+
+───────────────────────────────────────────────────────────────────────
+SPEC（逐字引用，不得修改）
+───────────────────────────────────────────────────────────────────────
+<<<SPEC>>>
+
+───────────────────────────────────────────────────────────────────────
+TARGET（输出目标）
+───────────────────────────────────────────────────────────────────────
+- file: ~/.codex/profiles/market-data.md（Codex CLI 用户级*可选 profile*；
+  按需加载，不在每次会话启动时加载）
+- audience: 已加载 `~/.codex/AGENTS.md` 并正在叠加市场数据域 profile 的
+  Codex CLI agent，或通过显式用户请求*独立加载此 profile（不加载入口
+  文件）*的 agent。因此，该 profile 必须能够独立使用。
+- style: 简洁 Markdown；英文散文；H2/H3 节标题
+- length budget: 总字符数不超过 6000
+- loading model:
+  - 这是一个*可选 profile*，不是入口文件
+  - 由 `~/.codex/AGENTS.md` 的 `## Optional Profiles` 节引用
+  - 也可能独立于入口文件加载；因此 spec §3 和 §4
+    （均为 `strength=hard, mode=verbatim, derive_to=[all]`，
+    包含 `codex.profiles.market-data`）必须在此 profile 内完整复制——
+    它们不会被传递性继承。
+
+需要派生的节——仅限 spec 中 `derive_to` 列表包含
+`codex.profiles.market-data` 的节。相关集合：
+
+- §3 Meta-rules — `derive_to: [all], mode: verbatim` → 逐字渲染
+- §4 Thinking Frameworks — `derive_to: [all], mode: verbatim` → 逐字渲染
+- §5 Domains — `derive_to: [codex, codex.profiles.engineering,
+  codex.profiles.market-data, claude]` → 仅渲染 **Business domain**
+  子集：FinTech、市场数据、图表、指标、回测、交易所连接；省略
+  Architecture & engineering 和 Education-system design 子集
+  （它们属于其他 profile）
+- §7 Hard Constraints — `derive_to: [all]` → 渲染为祈使句列表
+- §9 Anti-patterns — 作为负面参考；用于填充此 prompt 的 ANTI-PATTERNS 节
+
+`derive_to` 不包含的节（排除）：
+- §1 Identity — 不在此 profile 的派生列表中；不得包含
+- §2 Languages — 不在此 profile 的派生列表中；不得包含
+- §6 Active Projects — 不在派生列表中；不得包含
+- §8 Execution Protocol — 不在此 profile 的派生列表中；不得包含
+
+必需结构（按此顺序，使用以下精确 H2 标题）：
+
+1. `## Profile Scope`
+2. `## Meta-rules`
+3. `## Thinking Frameworks`
+4. `## Market-Data Domain`
+5. `## Hard Constraints`
+
+各节内容规则：
+
+- `## Profile Scope`
+  两到四行，说明：此 profile 适用于证券市场数据、FinTech、金融图表与
+  分析、技术指标计算、策略分析与回测，以及交易所连接任务；它叠加在
+  `~/.codex/AGENTS.md` 之上，但独立加载时也能自给自足。不得在
+  spec §5 Business domain 枚举范围之外捏造额外范围。
+
+- `## Meta-rules`
+  将 spec §3.1–§3.7 渲染为 7 个 H3 子节（`### structure-first`、
+  `### challenge-assumptions`、`### peer-level`、`### precision`、
+  `### no-default-hedging`、`### concept-clarity`、
+  `### assumption-expansion-right`）。每个子节的正文必须是对应子规则
+  的逐字文本，字符级一致。即使此 profile 比入口文件短，§3 正文仍为
+  `mode=verbatim`，不得压缩、改写或摘要。
+
+- `## Thinking Frameworks`
+  逐字渲染 spec §4：引导句、5 个框架的编号列表（含中英双语名称），
+  以及末尾的"禁止替换"说明。即使此 profile 比入口文件短，此块仍为
+  `mode=verbatim`，不得压缩。
+
+- `## Market-Data Domain`
+  结构性派生自 spec §5 **Business domain** 子集。§5 该标题下的每条
+  bullet 可重新格式化，但其内容（命名条目）必须保留。具体包含：
+  - global FinTech systems
+  - securities market-data infrastructure
+  - financial charting and analytics; technical indicator computation
+  - strategy analysis and backtesting
+  - exchange connectivity; multi-market, multi-timezone, cross-region
+    financial product systems
+  不得捏造 spec §5 中不存在的技术、平台或工具（例如，不得列出具体语言、
+  交易平台、供应商名称或 DSL 实现，除非在 spec 中逐字出现）。
+
+- `## Hard Constraints`
+  将 spec §7 渲染为 bullet 列表。每条约束保留原有祈使语气（"Do not …"）。
+  不得将 "Do not" 软化为 "prefer" 或 "should consider"。§7 的六条
+  约束必须全部出现。
+
+───────────────────────────────────────────────────────────────────────
+VERBATIM LOCK（逐字锁定）
+───────────────────────────────────────────────────────────────────────
+以下 spec 元素必须在输出中字符级精确出现，不得改写、重构、软化或压缩——
+即使此 profile 比入口文件短：
+
+- spec §3.1 (structure-first) — 置于 `### structure-first` 下
+- spec §3.2 (challenge-assumptions) — 置于 `### challenge-assumptions` 下
+- spec §3.3 (peer-level) — 置于 `### peer-level` 下
+- spec §3.4 (precision) — 置于 `### precision` 下
+- spec §3.5 (no-default-hedging) — 置于 `### no-default-hedging` 下
+- spec §3.6 (concept-clarity) — 置于 `### concept-clarity` 下
+- spec §3.7 (assumption-expansion-right) — 置于
+  `### assumption-expansion-right` 下
+- spec §4 思维框架块——引导句、5 个编号框架条目（含中英双语形式），
+  以及末尾 "Each framework must appear …" 句（结尾保留精确短语
+  "in derived targets"）
+
+长度压力不解除逐字锁定。若输出接近 6000 字符预算，削减 §5
+（Market-Data Domain）描述符或 §7 措辞——绝不削减 §3 或 §4。
+
+───────────────────────────────────────────────────────────────────────
+ANTI-PATTERNS（禁止出现于输出）
+───────────────────────────────────────────────────────────────────────
+1. 将 "must" / "do not" 替换为 "prefer" / "should consider" /
+   "may want to" / "try to avoid"。硬性规则必须使用祈使语气。
+2. 主语使用 "Claude"。主语应为 "the agent"。
+3. 捏造 SPEC 中不存在的事实，具体禁止：
+   - AI 演进时间线（禁止 "2014/2016/2023" 序列，禁止
+     "monolithic → microservices → AI Native" 叙事）。
+   - 设备名称（禁止 "MacBook Pro M5"、"Ghostty"、"tmux"、
+     "Antigravity"、"Codex CLI"、"Gemini CLI"、"Claude Code"、
+     "Google AI IDE"——这些均未出现在 spec 中）。
+   - Pine Script 或 Go 引擎背景——不在此 spec 中。
+   - spec §5 中不存在的捏造工具或语言清单。
+   - 超出 §1 范围的客户名称（且 §1 本身不在此 profile 的
+     derive_to 中）。
+4. 替换框架名称。五个框架必须为：
+   系统论 (systems theory), 控制论 (cybernetics), 信息论 (information
+   theory), 认识论 (epistemology), 混沌系统 (chaos theory)。禁止用
+   "first principles"、"control loops"、"information flow"、
+   "incentives"、"organization" 或任何近义词替换。
+5. 遗漏 §3.1–§3.7 中的任意子规则。此 profile 比入口文件短，但每条
+   子规则仍须出现。
+6. 遗漏 §4 中的任意框架。
+7. 因 profile 较短而压缩 §3 或 §4 逐字块。
+8. 包含 §1 Identity 内容（国籍、学校、工作场景）——不在此 profile 的
+   derive_to 中。
+9. 包含 §2 Languages 内容——不在此 profile 的 derive_to 中。
+10. 包含 §6 Active Projects 内容——不在 derive_to 中。
+11. 包含 §8 Execution Protocol 内容——不在此 profile 的 derive_to 中。
+12. 包含 §5 Architecture & engineering 或 Education-system-design 子集——
+    这些属于 engineering 和 education profile。
+13. 用代码围栏包裹整个输出。
+
+───────────────────────────────────────────────────────────────────────
+SELF-CHECK（发出输出前在内部验证）
+───────────────────────────────────────────────────────────────────────
+发出最终文件前，在内部逐项验证以下内容。
+若任一项未通过，修改草稿并重新验证，直至全部通过。
+
+- [ ] spec §3 的全部 7 条子规则均出现在各自的 H3 标题下，
+      正文与 spec 逐字一致（字符级，包含标点和 §3.6 的破折号）。
+- [ ] spec §4 的全部 5 个框架按顺序出现，各自带有中英双语形式，
+      与 spec §4 列出的完全一致。
+- [ ] §4 结尾行保留短语 "in derived targets"。
+- [ ] ANTI-PATTERNS 中的任何条目均未出现于草稿。
+- [ ] spec §7 中的全部六条祈使约束均作为独立 bullet 出现于
+      `## Hard Constraints` 下，保留 "Do not" 措辞。
+- [ ] 全文主语为 "the agent"，"Claude" 未出现。
+- [ ] §5 内容限于 **Business domain** 子集；
+      Architecture & engineering 和 Education-system-design 子集不存在。
+- [ ] 不存在 §1 Identity 内容（国籍、学历、工作场景国家列表）。
+- [ ] 不存在 §2 Languages 内容。
+- [ ] 不存在 §6 Active Projects 内容。
+- [ ] 不存在 §8 Execution Protocol 内容。
+- [ ] 总长度不超过 6000 字符。
+- [ ] 输出以 `# Arron Codex Market-Data Profile` 开头（无前言）。
+- [ ] 输出以 `## Hard Constraints` 的最后一条 bullet 结尾，
+      其后无任何附加文字。
+
+───────────────────────────────────────────────────────────────────────
+OUTPUT（输出规则）
+───────────────────────────────────────────────────────────────────────
+仅输出最终文件内容。无前言。无解释。不得用 Markdown 代码围栏包裹整个输出。
+直接以以下内容开头：
+
+    # Arron Codex Market-Data Profile
+
+直接以 `## Hard Constraints` 的最后一条 bullet 结尾。文件正文之后
+不得输出任何文字。
