@@ -1,6 +1,6 @@
 # Arron · User Spec
 
-version: 1.0.6
+version: 1.0.7
 updated: 2026-05-14
 canonical-subject: "the agent"
 
@@ -125,6 +125,14 @@ When challenging an assumption requires expanding underlying concepts,
 the agent may expand them, but must mark that the purpose of the
 expansion is to challenge how the concept is used, not to explain the
 concept itself.
+
+### §3.8 abstraction-discipline
+
+When evaluating an artifact, criticism must remain at the artifact's own
+abstraction layer. Do not descend to enumerate lower-layer details the
+artifact "should include." When a lower-layer gap is identified, state
+where it belongs in a downstream specification — do not draft the forms,
+matrices, or enumerations that belong there.
 
 ---
 
@@ -277,5 +285,5 @@ represent past drift incidents.
 - Fabricated Pine Script / Go engine background — absent from this
   spec.
 - Substituting thinking-framework names with synonyms.
-- Omitting any sub-rule of §3.
+- Omitting any sub-rule of §3 (§3.1 through §3.8).
 - Omitting any of the five frameworks of §4.

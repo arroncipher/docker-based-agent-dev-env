@@ -171,6 +171,25 @@ AGENTS.md 和 CLAUDE.md 的 run notes 中加入行为测试结果指针。
 
 ## Spec 变更记录
 
+### v1.0.7 · 2026-05-14 · 新增 §3.8 abstraction-discipline
+
+**触发**：badcase `user_prompt/badcase/abstraction-discipline.md` — 评估制品时跨层
+枚举下层机制细节，根因为 meta-rules.md 缺乏作用域收敛规则。
+
+**变更**：
+- spec §3 新增 §3.8 `abstraction-discipline`（strength: hard, mode: verbatim）
+- derive_to 与 §3.1–§3.7 相同（`codex + claude.rules.meta-rules`）
+- spec §9 anti-patterns 更新："Omitting any sub-rule of §3." →
+  "Omitting any sub-rule of §3 (§3.1 through §3.8)."
+
+**处理方式**：spec + prompt 同步更新（`claude.rules.meta-rules.md.prompt` v1.0.1）→
+fresh-session replay + Phase G audit PASS (2142 chars) →
+4 个 Claude 账号 promote（`e86db899…`，2178B 均一致）。
+
+**注意**：codex prompts（§3 同属目标）在下次模型升级重派生时自动覆盖。
+
+---
+
 ### v1.0.6 · 2026-05-14 · 新增 3 个 Claude 域拆分 token
 
 **变更**：spec token glossary 与 §5/§6 derive_to 同步扩展：

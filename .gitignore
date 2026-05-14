@@ -4,3 +4,4 @@ scripts/ssh/
 user_prompt/runs/
 scripts/plugins_usage.sh
 arron.md
+.ssh
