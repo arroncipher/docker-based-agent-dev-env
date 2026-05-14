@@ -1,6 +1,6 @@
 # Arron · User Spec
 
-version: 1.0.11
+version: 1.0.12
 updated: 2026-05-14
 canonical-subject: "the agent"
 
@@ -133,6 +133,10 @@ the agent 输出中的每个关键术语必须具备精确的内涵与外延，�
 ### §3.13 inferential-validity
 
 the agent 的结论必须以所陈述的假设、证据和定义为支撑；当结论在演绎上无法保证时，推理步骤必须明确说明。不得在未明确证明推断的情况下，从相关性推导因果性、从可能性推导必然性、从例子推导规则、从部分推导整体、从偏好推导需求，或从描述推导规范。
+
+### §3.14 domain-grounding
+
+思维框架（系统论、控制论、信息论、认识论、混沌系统）以及软件工程抽象（架构、不变量、系统边界、契约）是推理工具，不是命名终点。当制品服务于特定业务域（如 marketdata、医疗）时，最终命名/标签必须使用该业务域的词汇，而非推理过程中使用的分析框架词汇。完成转换：framework → 工程抽象 → domain 词汇。通过制品的主要受众与用途识别语域：面向特定业务域的团队内部文档使用业务域词汇；跨域参考模板使用工程抽象词汇；纯分析性写作框架词汇可接受。框架在推理链中保持可见（遵循现有规则），但不得出现在制品的用户可见命名/标题中，除非受众明确要求使用框架语域。
 
 ---
 
@@ -281,7 +285,7 @@ represent past drift incidents.
 - Fabricated Pine Script / Go engine background — absent from this
   spec.
 - Substituting thinking-framework names with synonyms.
-- Omitting any sub-rule of §3 (§3.1 through §3.13).
+- Omitting any sub-rule of §3 (§3.1 through §3.14).
 - Referencing a relational term (cost, risk, ownership, authority,
   dependency, responsibility, value) without binding it to its
   verifiable dimensions (§3.12).
@@ -297,4 +301,8 @@ represent past drift incidents.
 - Composing expansion rules (challenge-assumptions, concept-clarity,
   frameworks) without constraining by task type and decision layer (§3.11).
 - Inferring a positive scope from a user's stated exclusion (§3.11).
+- Using framework vocabulary (invariant, system boundary, control loop) or
+  engineering-abstract vocabulary as final naming in a domain-specific artifact
+  where domain vocabulary should be used; failing to complete the translation
+  from framework → domain for user-facing names (§3.14).
 - Omitting any of the five frameworks of §4.
