@@ -186,7 +186,8 @@ AGENTS.md 和 CLAUDE.md 的 run notes 中加入行为测试结果指针。
 fresh-session replay + Phase G audit PASS (4122 chars / 4200 budget) →
 4 个 Claude 账号 promote（`de70d927…`，4162B 均一致）。
 
-**注意**：budget 余量仅 78 chars；下次规则新增前先评估是否需扩预算。
+**Budget 扩容（2026-05-14）**：prompt length budget 已从 4200 → 5000，
+`claude.rules.meta-rules.md.prompt` v1.0.3（两处：TARGET block + SELF-CHECK block）。
 
 ---
 
@@ -207,7 +208,7 @@ fresh-session replay + Phase G audit PASS (4122 chars / 4200 budget) →
 fresh-session replay + Phase G audit PASS (3258 chars / 4200 budget) →
 4 个 Claude 账号 promote（`3c3f266f…`，3296B 均一致）。
 
-**行为门控**：3 个场景待交互验证，见
+**行为门控**：3 个场景全部 PASS（claude-sonnet-4-6, claude_max20 wrapper），见
 `runs/2026-05-14_behavior_meta-rules_v1.0.8/REPORT.md`。
 
 **暂缓**：`example-boundary`、`minimal-sufficient-answer`、
