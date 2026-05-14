@@ -516,6 +516,56 @@ rules 注入每个会话，额外占用 ~13.5K chars context window。
 
 ---
 
+## Phase J · §3/§4 中文化 + Codex 输出改中文 ✅ DONE 2026-05-14
+
+**触发**：
+1. 用户指令：将所有用户级提示词改为中文。
+2. 用户确认方向 2：Codex 输出文件本身也改为中文（原仅指令中文，输出为英文散文）。
+3. 用户确认：`.coding_agents/claude_pro/.claude/rules/meta-rules.md` 改为中文（覆盖全部 4 个 Claude 账号）。
+
+**变更（spec v1.0.11）**：
+- spec §3（§3.1–§3.13）正文从英文翻译为中文（verbatim 锁从英文改为中文）
+- spec §4 引导句与末尾"禁止替换"说明翻译为中文（5 个框架名称保持中英双语）
+
+**提示词变更（全部 5 个派生目标）**：
+- `claude.rules.meta-rules.md.prompt` v1.0.4：`spec-version-required: 1.0.11`；
+  ANTI-PATTERNS #1 改为中文版弱化检测；SELF-CHECK "in derived targets" → "在派生目标中"
+- `codex.AGENTS.md.prompt` v1.0.2：`style: 英文散文` → `简体中文（zh-CN）；技术术语保留英文`；
+  Optional Profiles 描述改为中文；ANTI-PATTERNS #1 改为中文版检测
+- `codex.profiles.engineering.md.prompt` v1.0.2：同上 style 变更；VERBATIM LOCK §4 短语 → "在派生目标中"；SELF-CHECK 更新
+- `codex.profiles.market-data.md.prompt` v1.0.2：同上
+- `codex.profiles.education.md.prompt` v1.0.2：同上
+
+**部署**：
+- `claude.rules.meta-rules.md` v1.0.4 派生输出（`73c23d9e…` 3767B）→ 4 个 Claude 账号
+- Codex AGENTS.md + 3 profiles 重派生（中文版）→ 2 个 Codex 账号：
+  - `AGENTS.md`：`f62f8b90…` 5201B
+  - `profiles/engineering.md`：`b3fa34a6…` 4053B
+  - `profiles/market-data.md`：`8bfba0fe…` 2925B
+  - `profiles/education.md`：`eeeb7b54…` 3804B
+
+**注意**：
+- §6.1 三条派生规则 bullet 在 education profile 中保持英文（verbatim from spec §6.1，§6.1 本身未翻译）
+- spec §9 Anti-patterns 保持英文（derive_to: compiler-only，非派生内容）
+- education profile `## Anti-patterns` 节已随 style 变更翻译为中文
+
+---
+
+### v1.0.11 · 2026-05-14 · §3/§4 中文化
+
+**触发**：用户将 spec 的工作语言从英文改为中文（§3 verbatim lock 现在为中文）。
+
+**变更**：
+- spec §3.1–§3.13 正文从英文翻译为中文
+- spec §4 引导句与末尾说明翻译为中文；5 个框架名称保持中英双语
+
+**处理方式**：spec 直接编辑 → `claude.rules.meta-rules.md.prompt` v1.0.4 → 在会话内
+deterministic 编译 → Phase G audit PASS (~2350 chars / 5000 budget) →
+4 个 Claude 账号 promote（`73c23d9e…` 3767B 均一致）；
+4 个 Codex prompts v1.0.2 → Codex 输出重派生 → 2 个 Codex 账号 promote（hash 均一致）。
+
+---
+
 ## 不在本计划内的事
 
 - 不做 prompt 模板抽象（`prompts/_shared.md`）——5 份 prompt 抽象成本高于复制成本。

@@ -2,8 +2,8 @@
 DERIVATION PROMPT · claude / user-level / rules/meta-rules.md
 ═══════════════════════════════════════════════════════════════════════
 
-prompt-version: 1.0.3
-spec-version-required: 1.0.9
+prompt-version: 1.0.4
+spec-version-required: 1.0.11
 target-file: ~/.claude/rules/meta-rules.md
 intended-model: claude-sonnet-4-6 (or equivalent capability)
 intended-temperature: 0
@@ -95,8 +95,7 @@ VERBATIM LOCK（逐字锁定）
 ───────────────────────────────────────────────────────────────────────
 ANTI-PATTERNS（禁止出现于输出）
 ───────────────────────────────────────────────────────────────────────
-1. 将 "must" / "do not" 替换为 "prefer" / "should consider" /
-   "may want to" / "try to avoid"。
+1. 将 "必须" / "不得" 替换为 "建议" / "应考虑" / "尽量避免" 等弱化表述。
 2. 主语使用 "Claude"。主语应为 "the agent"。
 3. 替换框架名称。五个框架必须为：
    系统论 (systems theory), 控制论 (cybernetics), 信息论 (information
@@ -123,7 +122,7 @@ SELF-CHECK（发出输出前在内部验证）
       structure-first 至 §3.13 inferential-validity），正文与 spec 逐字一致。
 - [ ] spec §4 的全部 5 个框架均出现，各自带有中英双语形式，
       按 spec §4 所列顺序排列。
-- [ ] §4 结尾保留短语 "in derived targets"。
+- [ ] §4 结尾保留短语 "在派生目标中"。
 - [ ] 文件以 `## Meta-rules` 开头（无 H1、无 frontmatter、无前言）。
 - [ ] 文件以 §4 末尾 "禁止替换" 说明的最后一行结尾，其后无任何附加文字。
 - [ ] 总长度不超过 5000 字符。

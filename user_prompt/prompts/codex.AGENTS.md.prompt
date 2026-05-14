@@ -2,8 +2,8 @@
 DERIVATION PROMPT · codex / user-level / AGENTS.md
 ═══════════════════════════════════════════════════════════════════════
 
-prompt-version: 1.0.1
-spec-version-required: 1.0.6
+prompt-version: 1.0.2
+spec-version-required: 1.0.11
 target-file: ~/.codex/AGENTS.md
 intended-model: claude-opus-4-7 (or equivalent capability)
 intended-temperature: 0
@@ -29,7 +29,7 @@ TARGET（输出目标）
 ───────────────────────────────────────────────────────────────────────
 - file: ~/.codex/AGENTS.md（Codex CLI 用户级入口点）
 - audience: Codex CLI agent 在会话启动时加载此文件
-- style: 简洁 Markdown；英文散文；H2/H3 节标题
+- style: 简洁 Markdown；简体中文（zh-CN）；技术术语保留英文；H2/H3 节标题
 - length budget: 总字符数不超过 6000
 - structure（按此顺序，使用以下精确 H2 标题）：
   1. `## Instruction Priority`
@@ -81,13 +81,10 @@ TARGET（输出目标）
 
 - `## Optional Profiles`
   单行索引，指向将单独派生的三个 Codex profile 文件：
-  - `profiles/engineering.md` — coding, architecture, runtime,
-    infrastructure, engineering execution.
-  - `profiles/market-data.md` — securities market data, FinTech,
-    charting, indicators, backtesting.
-  - `profiles/education.md` — education-system design, curriculum,
-    concept-centered learning.
-  末尾加：`Load only when clearly relevant; load the smallest necessary set.`
+  - `profiles/engineering.md` — 编码、架构、运行时、平台、基础设施与工程执行。
+  - `profiles/market-data.md` — 证券 market-data、FinTech、金融图表、技术指标、backtesting。
+  - `profiles/education.md` — 教育系统设计、课程设计、以概念为中心的学习。
+  末尾加：`仅在明确相关时加载；加载所需的最小集合。`
 
 ───────────────────────────────────────────────────────────────────────
 VERBATIM LOCK（逐字锁定）
@@ -107,8 +104,8 @@ VERBATIM LOCK（逐字锁定）
 ───────────────────────────────────────────────────────────────────────
 ANTI-PATTERNS（禁止出现于输出）
 ───────────────────────────────────────────────────────────────────────
-1. 将 "must" / "do not" 替换为 "prefer" / "should consider" / "may
-   want to" / "try to avoid"。硬性规则必须使用祈使语气。
+1. 将 "必须" / "不得" 替换为 "建议" / "应考虑" / "尽量避免" 等弱化表述。
+   硬性规则必须使用明确祈使语气。
 2. 主语使用 "Claude"。主语应为 "the agent"。
 3. 捏造 SPEC 中不存在的事实，具体禁止：
    - AI 演进时间线（禁止 "2014/2016/2023" 序列）。

@@ -2,8 +2,8 @@
 DERIVATION PROMPT · codex / user-level / profiles/market-data.md
 ═══════════════════════════════════════════════════════════════════════
 
-prompt-version: 1.0.1
-spec-version-required: 1.0.6
+prompt-version: 1.0.2
+spec-version-required: 1.0.11
 target-file: ~/.codex/profiles/market-data.md
 intended-model: claude-opus-4-7 (or equivalent capability)
 intended-temperature: 0
@@ -33,7 +33,7 @@ TARGET（输出目标）
 - audience: 已加载 `~/.codex/AGENTS.md` 并正在叠加市场数据域 profile 的
   Codex CLI agent，或通过显式用户请求*独立加载此 profile（不加载入口
   文件）*的 agent。因此，该 profile 必须能够独立使用。
-- style: 简洁 Markdown；英文散文；H2/H3 节标题
+- style: 简洁 Markdown；简体中文（zh-CN）；技术术语保留英文；H2/H3 节标题
 - length budget: 总字符数不超过 6000
 - loading model:
   - 这是一个*可选 profile*，不是入口文件
@@ -123,8 +123,7 @@ VERBATIM LOCK（逐字锁定）
 - spec §3.7 (assumption-expansion-right) — 置于
   `### assumption-expansion-right` 下
 - spec §4 思维框架块——引导句、5 个编号框架条目（含中英双语形式），
-  以及末尾 "Each framework must appear …" 句（结尾保留精确短语
-  "in derived targets"）
+  以及末尾"禁止替换"说明（结尾保留精确短语"在派生目标中"）
 
 长度压力不解除逐字锁定。若输出接近 6000 字符预算，削减 §5
 （Market-Data Domain）描述符或 §7 措辞——绝不削减 §3 或 §4。
@@ -132,8 +131,8 @@ VERBATIM LOCK（逐字锁定）
 ───────────────────────────────────────────────────────────────────────
 ANTI-PATTERNS（禁止出现于输出）
 ───────────────────────────────────────────────────────────────────────
-1. 将 "must" / "do not" 替换为 "prefer" / "should consider" /
-   "may want to" / "try to avoid"。硬性规则必须使用祈使语气。
+1. 将 "必须" / "不得" 替换为 "建议" / "应考虑" / "尽量避免" 等弱化表述。
+   硬性规则必须使用明确祈使语气。
 2. 主语使用 "Claude"。主语应为 "the agent"。
 3. 捏造 SPEC 中不存在的事实，具体禁止：
    - AI 演进时间线（禁止 "2014/2016/2023" 序列，禁止
@@ -173,10 +172,10 @@ SELF-CHECK（发出输出前在内部验证）
       正文与 spec 逐字一致（字符级，包含标点和 §3.6 的破折号）。
 - [ ] spec §4 的全部 5 个框架按顺序出现，各自带有中英双语形式，
       与 spec §4 列出的完全一致。
-- [ ] §4 结尾行保留短语 "in derived targets"。
+- [ ] §4 结尾行保留短语 "在派生目标中"。
 - [ ] ANTI-PATTERNS 中的任何条目均未出现于草稿。
 - [ ] spec §7 中的全部六条祈使约束均作为独立 bullet 出现于
-      `## Hard Constraints` 下，保留 "Do not" 措辞。
+      `## Hard Constraints` 下，保留 "不得" 措辞。
 - [ ] 全文主语为 "the agent"，"Claude" 未出现。
 - [ ] §5 内容限于 **Business domain** 子集；
       Architecture & engineering 和 Education-system-design 子集不存在。
