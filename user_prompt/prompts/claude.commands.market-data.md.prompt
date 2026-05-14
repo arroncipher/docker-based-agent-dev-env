@@ -5,6 +5,7 @@ DERIVATION PROMPT · claude / user-level / commands/market-data.md
 prompt-version: 1.0.0
 spec-version-required: 1.0.6
 target-file: ~/.claude/commands/market-data.md
+status: RETIRED 2026-05-14 — Business domain merged into claude.rules.engineering (spec v1.0.10)
 intended-model: claude-sonnet-4-6 (or equivalent capability)
 intended-temperature: 0
 

@@ -487,13 +487,32 @@ rules 注入每个会话，额外占用 ~13.5K chars context window。
 4 个账号同步执行，`rules/` 现仅含 3 个有效文件：
 - `context.md`（always-loaded）
 - `meta-rules.md`（always-loaded）
-- `engineering.md`（path-scoped）
+- `engineering.md`（always-loaded；spec v1.0.10 后合并 market-data，见 Phase I）
 
 **验证**：
 - 从 `/tmp` 运行新会话：加载 CLAUDE.md + context.md + meta-rules.md，无备份文件 ✓
 - 从工程目录运行新会话：加载 context.md + meta-rules.md，无备份文件 ✓
 
 **注意**：`rules/` 子目录会被 Claude Code 递归扫描（实测确认），故不能用 `rules/archive/`。
+
+---
+
+## Phase I · engineering + market-data 合并 ✅ DONE 2026-05-14
+
+**问题**：engineering.md（path-scoped）与 market-data.md（slash command）被设计为
+独立激活，但用户的工程工作就是 market-data 工程，两者在实践中不可分离。
+
+**变更（spec v1.0.10）**：
+- spec §5 `derive_to` 移除 `claude.commands.market-data`
+- `claude.rules.engineering` token 描述从 path-scoped 改为 always-loaded，
+  覆盖 Architecture & engineering + Business domain 统一上下文
+- `prompts/claude.rules.engineering.md.prompt` v1.0.1：无 paths: frontmatter，
+  3 个 H2 节（Architecture & Engineering / Market-Data 域上下文 / 工作模式）
+- `prompts/claude.commands.market-data.md.prompt`：标注 RETIRED
+- 4 个 Claude 账号：`rules/engineering.md` 替换为新版（`5a287b21…` 1570B），
+  `commands/market-data.md` 删除；`commands/` 仅剩 `education.md`
+
+**验证**：fresh-session replay，结构 audit PASS（1570 chars / 3500 budget）。
 
 ---
 

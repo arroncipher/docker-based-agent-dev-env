@@ -1,6 +1,6 @@
 # Arron · User Spec
 
-version: 1.0.9
+version: 1.0.10
 updated: 2026-05-14
 canonical-subject: "the agent"
 
@@ -32,10 +32,8 @@ Every section carries three derivation metadata fields:
     (always-loaded; no `paths:` frontmatter; priority equal to
     `CLAUDE.md`)
   - `claude.rules.engineering` — `.claude/rules/engineering.md`
-    (path-scoped via `paths:` frontmatter; loaded when the agent is
-    about to read matching source-code files)
-  - `claude.commands.market-data` — `.claude/commands/market-data.md`
-    (slash command; loaded when the user types `/market-data`)
+    (always-loaded; no `paths:` frontmatter; covers Architecture &
+    engineering + Business domain as a unified always-on context)
   - `claude.commands.education` — `.claude/commands/education.md`
     (slash command; loaded when the user types `/education`)
   - `gemini` — reserved
@@ -202,17 +200,17 @@ replacements for the items above).
 
 ## §5 Domains
 
-strength: soft | derive_to: [codex, codex.profiles.engineering, codex.profiles.market-data, claude.rules.context, claude.rules.engineering, claude.commands.market-data] | mode: structured
+strength: soft | derive_to: [codex, codex.profiles.engineering, codex.profiles.market-data, claude.rules.context, claude.rules.engineering] | mode: structured
 
 Primary technical and business domains. Targets may select the subset
 relevant to their profile:
 
 - `claude.rules.context` / `codex` AGENTS.md: summary across all three
   subsets (Architecture & engineering, Business domain, Education).
-- `codex.profiles.engineering` / `claude.rules.engineering`:
-  Architecture & engineering subset, deeper detail.
-- `codex.profiles.market-data` / `claude.commands.market-data`:
-  Business domain subset, deeper detail.
+- `codex.profiles.engineering`: Architecture & engineering subset, deeper detail.
+- `codex.profiles.market-data`: Business domain subset, deeper detail.
+- `claude.rules.engineering`: Architecture & engineering + Business domain,
+  unified always-loaded context (the two domains are operationally inseparable).
 
 **Architecture & engineering:**
 - monolithic architecture; distributed systems; cloud-native
