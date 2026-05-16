@@ -15,6 +15,16 @@
 
 非目标和已退役的旧机制（`docker-compose.dev.yml`、`AGENT_ACCOUNT_ID` 等）见 `docs/00-problem-and-scope.md`。
 
+## 制品语域
+
+本仓库 scope：coding-agent 开发环境建设——容器镜像与 Compose、`.coding_agents/<account>/` 多账号目录、statusline、用户级提示词、skills 等 harness 配置；不含业务域任务（marketdata、医疗、金融业务实现不在本仓）。
+
+Agent 产出的制品（`docs/`、shell 脚本、Dockerfile/Compose、PR 描述、commit subject、章节标题、变量与配置键名）须按以下 register 着陆：
+
+- **域 register**：harness 工程抽象——Docker / Compose / sing-box / wrapper / account directory / statusline / hook / skill / slash command / permission / `settings.json`。不得使用业务域词汇。
+- **受众 register**：harness 运维者与 Agent 配置作者，非业务域终端用户。
+- **Framework 词汇**：系统论 / 控制论 / 信息论 / 认识论 / 混沌系统作为 reasoning 工具可见于推理过程，不得出现在制品的用户可见命名/标题中（见 meta-rules §3.15）。如需在 reasoning 中应用，最终命名须完成 framework → 工程抽象 的转换。
+
 ## 关键路径
 
 | 用途 | 路径 |
