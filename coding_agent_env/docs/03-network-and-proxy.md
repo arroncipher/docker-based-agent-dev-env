@@ -102,7 +102,7 @@ flowchart LR
 
 - 整条路径是**进程管理 + UNIX 套接字 + stdio 管道**，**完全不进入宿主 TCP/IP 栈，也不进入 sing-box**。
 - VS Code Server 在容器内**自身发起**的网络请求（拉取插件、Language Server 联网等）才会进入 sing-box —— 此时走"出站数据流"路径。
-- Remote-SSH 走 SSH（路径 A），Attach to Running Container 走 docker exec（路径 B）。本仓库推荐路径 B（见 `docs/02`）。
+- Remote-SSH 走 SSH（路径 A），Attach to Running Container 走 docker exec（路径 B）。本仓库推荐路径 B（见 `02-setup-and-operations.md`）。
 
 ### 2.6 出站数据流
 
@@ -161,7 +161,7 @@ flowchart LR
 Compose 变量：
 
 ```text
-compose/coding-agent/coding-agent.env
+coding_agent_env/compose/coding-agent/coding-agent.env
 ```
 
 sing-box 运行配置（容器内挂载到 `/etc/sing-box/config.json`）：

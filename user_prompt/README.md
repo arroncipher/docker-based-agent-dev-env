@@ -1,6 +1,6 @@
 # user_prompt · Agent 配置派生
 
-> 本目录是仓库子项目 2 「用户提示词搭建」的 scope 文档（umbrella: `../docs/00-projects.md`）。完成判据见 §18。
+> 本目录是仓库子项目 2 「用户提示词搭建」的 scope 文档（umbrella: `../PROJECTS.md`）。完成判据见 §18。
 
 Arron 用户级 agent 配置的单一真相源，以及将其编译为各 agent 文件的派生 prompt。
 

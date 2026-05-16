@@ -1,6 +1,6 @@
 # 问题定义与范围
 
-> 本文档是仓库子项目 1 「Docker 账户环境搭建」的 scope 文档（umbrella: `00-projects.md`）。
+> 本文档是仓库子项目 1 「Docker 账户环境搭建」的 scope 文档（umbrella: `../../PROJECTS.md`）。
 
 ## 目标
 
@@ -20,7 +20,7 @@
 当前实现覆盖：
 
 - 构建共享基础镜像 `coding-agent-base:debian-bookworm`。
-- 通过 `compose/coding-agent/docker-compose.sing-box.yml` 启动 coding-agent 容器和 sing-box gateway。
+- 通过 `coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml` 启动 coding-agent 容器和 sing-box gateway。
 - 将宿主机需求根目录 `CODING_AGENT_WORK_DIR` 挂载到容器 `/data/work_dir`。
 - 本地工具状态目录不整体挂载进容器；容器只通过 `CODING_AGENT_SSH_AUTHORIZED_KEYS` 和 `CODING_AGENT_SING_BOX_CONFIG_DIR` 使用运行所需的 SSH 公钥和 sing-box 配置。
 - 使用 VS Code `Attach to Running Container` 后打开具体 `/data/work_dir/<ticket-or-repo>`。
@@ -47,4 +47,4 @@
 
 ## 完成判据
 
-TBD。本子项目当前为 ongoing；完成语义未定义。候选方向（待选定后写入此节）：MVP 完成（多账号 + 网络 + VS Code 接入在最新 Docker Desktop 版本上稳定通过烟测）/ 里程碑完成（按 `docs/05-verification.md` 全部检查项通过即视为当前迭代闭环）/ 退役条件（更优容器/沙箱方案替代）。
+TBD。本子项目当前为 ongoing；完成语义未定义。候选方向（待选定后写入此节）：MVP 完成（多账号 + 网络 + VS Code 接入在最新 Docker Desktop 版本上稳定通过烟测）/ 里程碑完成（按 `05-verification.md` 全部检查项通过即视为当前迭代闭环）/ 退役条件（更优容器/沙箱方案替代）。

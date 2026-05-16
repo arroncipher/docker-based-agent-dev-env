@@ -1,34 +1,36 @@
 # CLAUDE.md
 
-本文档为 Claude Code 在此仓库中工作时提供最小必要指导。完整背景以 `docs/` 中的编号文档为准。
+本文档为 Claude Code 在此仓库中工作时提供最小必要指导。完整背景以 `coding_agent_env/docs/` 中的编号文档为准。
 
 ## 项目结构
 
-本仓库由若干子项目组成（详见 `docs/00-projects.md`）：
+本仓库由若干子项目组成（详见 `PROJECTS.md`）：
 
-- 子项目 1 「Docker 账户环境搭建」——`docs/00-problem-and-scope.md`
+- 子项目 1 「Docker 账户环境搭建」——`coding_agent_env/docs/00-problem-and-scope.md`
 - 子项目 2 「用户提示词搭建」——`user_prompt/README.md`
 
 未来子项目按需追加。下文「制品语域」「工作规则」为跨子项目共享约束；「仓库定位」「关键路径」「常用命令」「文档索引」默认描述子项目 1，子项目 2 工作流见其 README。
+
+`scripts/` 在仓库根部，跨子项目共享（wrapper、host helper、plugin、statusline、ccusage 等），不归属任何单一子项目。
 
 ## 仓库定位
 
 本仓库维护一套本地 coding-agent Docker 开发环境：
 
 - 基础镜像：`coding-agent-base:debian-bookworm`
-- Compose 入口：`compose/coding-agent/docker-compose.sing-box.yml`
-- Compose 配置：`compose/coding-agent/coding-agent.env`
+- Compose 入口：`coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml`
+- Compose 配置：`coding_agent_env/compose/coding-agent/coding-agent.env`
 - 账号目录不整体挂载进容器；Compose 只按 `CODING_AGENT_SSH_AUTHORIZED_KEYS` 和 `CODING_AGENT_SING_BOX_CONFIG_DIR` 挂载具体文件/目录。
 - 需求根目录：`CODING_AGENT_WORK_DIR` -> `/data/work_dir`
 - 容器用户：`arron:staff`，UID/GID `501:20`，具备免密 sudo。
 
-非目标和已退役的旧机制（`docker-compose.dev.yml`、`AGENT_ACCOUNT_ID` 等）见 `docs/00-problem-and-scope.md`。
+非目标和已退役的旧机制（`docker-compose.dev.yml`、`AGENT_ACCOUNT_ID` 等）见 `coding_agent_env/docs/00-problem-and-scope.md`。
 
 ## 制品语域
 
 本仓库 scope：coding-agent 开发环境建设——容器镜像与 Compose、`.coding_agents/<account>/` 多账号目录、statusline、用户级提示词、skills 等 harness 配置；不含业务域任务（marketdata、医疗、金融业务实现不在本仓）。
 
-Agent 产出的制品（`docs/`、shell 脚本、Dockerfile/Compose、PR 描述、commit subject、章节标题、变量与配置键名）须按以下 register 着陆：
+Agent 产出的制品（`coding_agent_env/docs/`、shell 脚本、Dockerfile/Compose、PR 描述、commit subject、章节标题、变量与配置键名）须按以下 register 着陆：
 
 - **域 register**：harness 工程抽象——Docker / Compose / sing-box / wrapper / account directory / statusline / hook / skill / slash command / permission / `settings.json`。不得使用业务域词汇。
 - **受众 register**：harness 运维者与 Agent 配置作者，非业务域终端用户。
@@ -38,11 +40,11 @@ Agent 产出的制品（`docs/`、shell 脚本、Dockerfile/Compose、PR 描述�
 
 | 用途 | 路径 |
 |---|---|
-| 基础镜像 | `images/coding-agent-base/debian-bookworm/Dockerfile` |
-| 容器入口 | `images/coding-agent-base/debian-bookworm/entrypoint.sh` |
-| Compose | `compose/coding-agent/docker-compose.sing-box.yml` |
-| Compose env | `compose/coding-agent/coding-agent.env` |
-| sing-box 模板 | `compose/coding-agent/sing-box.config.json` |
+| 基础镜像 | `coding_agent_env/images/coding-agent-base/debian-bookworm/Dockerfile` |
+| 容器入口 | `coding_agent_env/images/coding-agent-base/debian-bookworm/entrypoint.sh` |
+| Compose | `coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml` |
+| Compose env | `coding_agent_env/compose/coding-agent/coding-agent.env` |
+| sing-box 模板 | `coding_agent_env/compose/coding-agent/sing-box.config.json` |
 | 构建脚本 | `scripts/host-build-base-image.sh` |
 | 环境默认值 | `scripts/host-env.sh` |
 
@@ -54,22 +56,22 @@ scripts/host-build-base-image.sh
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   config
 ```
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   up -d
 ```
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   exec coding_agent bash
 ```
 
@@ -84,9 +86,9 @@ docker-compose \
 
 ## 文档索引
 
-- `docs/00-problem-and-scope.md` — 问题定义、范围和非目标
-- `docs/01-architecture.md` — 当前架构、目录挂载和边界
-- `docs/02-setup-and-operations.md` — 搭建、启动、停止、VS Code 接入
-- `docs/03-network-and-proxy.md` — sing-box TUN、DNS 和代理验证
-- `docs/04-agent-workflow.md` — Agent 工作流、代码风格、提交与 PR 规范
-- `docs/05-verification.md` — 静态检查、镜像构建和运行时检查
+- `coding_agent_env/docs/00-problem-and-scope.md` — 问题定义、范围和非目标
+- `coding_agent_env/docs/01-architecture.md` — 当前架构、目录挂载和边界
+- `coding_agent_env/docs/02-setup-and-operations.md` — 搭建、启动、停止、VS Code 接入
+- `coding_agent_env/docs/03-network-and-proxy.md` — sing-box TUN、DNS 和代理验证
+- `coding_agent_env/docs/04-agent-workflow.md` — Agent 工作流、代码风格、提交与 PR 规范
+- `coding_agent_env/docs/05-verification.md` — 静态检查、镜像构建和运行时检查

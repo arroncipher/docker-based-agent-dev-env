@@ -29,8 +29,8 @@ Host macOS
 | 决策 | 当前设计 |
 |---|---|
 | 基础镜像 | `coding-agent-base:debian-bookworm` |
-| Compose 入口 | `compose/coding-agent/docker-compose.sing-box.yml` |
-| Compose 配置 | `compose/coding-agent/coding-agent.env` |
+| Compose 入口 | `coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml` |
+| Compose 配置 | `coding_agent_env/compose/coding-agent/coding-agent.env` |
 | 容器用户 | `arron:staff`，UID/GID `501:20`，`HOME=/home/arron`，免密 sudo |
 | 需求代码 | 宿主机 `CODING_AGENT_WORK_DIR`，容器 `/data/work_dir` |
 | 账号状态 | 宿主机 `.coding_agents/<account>`，不挂载进容器 |

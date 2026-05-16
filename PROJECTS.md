@@ -6,10 +6,12 @@
 
 | 编号 | 子项目 | scope 文档 | 状态 |
 |---|---|---|---|
-| 1 | Docker 账户环境搭建 | `docs/00-problem-and-scope.md`（详 `docs/01`–`docs/05`） | ongoing |
+| 1 | Docker 账户环境搭建 | `coding_agent_env/docs/00-problem-and-scope.md`（详 `coding_agent_env/docs/01`–`05`） | ongoing |
 | 2 | 用户提示词搭建 | `user_prompt/README.md`（spec `user_prompt/spec/`、TODO `user_prompt/TODO.md`） | ongoing |
 
-未来子项目按需追加。新子项目在本表登记后，独立放置 scope 文档（推荐 `<subproject>/README.md` 或 `docs/<subproject>-scope.md`），并在文档骨架中预留 `## 完成判据` 节。
+未来子项目按需追加。新子项目在本表登记后，独立放置 scope 文档（推荐 `<subproject>/README.md` 或 `<subproject>/docs/00-problem-and-scope.md`），并在文档骨架中预留 `## 完成判据` 节。
+
+`scripts/` 在仓库根部，跨子项目共享（wrapper、host helper、plugin、statusline、ccusage 等），不归属任何单一子项目。新子项目如需共享脚本，应直接复用根级 `scripts/`；子项目专属脚本放在子项目目录内。
 
 ## 跨子项目共享的约束
 

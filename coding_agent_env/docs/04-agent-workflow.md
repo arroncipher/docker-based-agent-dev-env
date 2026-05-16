@@ -70,7 +70,7 @@ Agent 不应：
 
 - Shell 脚本使用 Bash；可执行流程优先使用 `set -euo pipefail`，变量必须加引号。
 - 宿主机侧 helper 放在 `scripts/`，文件名使用小写 kebab-case，例如 `host-build-base-image.sh`。
-- Docker 与 Compose 修改应保留当前 `arron:staff` 用户、`/data/work_dir` 挂载、以及账号目录只按用途挂载的模型；改变这些边界必须同步更新 `docs/01-architecture.md`。
+- Docker 与 Compose 修改应保留当前 `arron:staff` 用户、`/data/work_dir` 挂载、以及账号目录只按用途挂载的模型；改变这些边界必须同步更新 `01-architecture.md`。
 
 ## 提交与 Pull Request 规范
 

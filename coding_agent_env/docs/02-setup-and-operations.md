@@ -40,14 +40,14 @@ cp compose/coding-agent/sing-box.config.json "$CODING_AGENT_SING_BOX_CONFIG_DIR/
 scripts/host-build-base-image.sh
 ```
 
-当 `images/coding-agent-base/debian-bookworm/Dockerfile` 或 `entrypoint.sh` 变化后，需要重新构建。
+当 `coding_agent_env/images/coding-agent-base/debian-bookworm/Dockerfile` 或 `entrypoint.sh` 变化后，需要重新构建。
 
 ## 校验 Compose
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   config
 ```
 
@@ -57,8 +57,8 @@ docker-compose \
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   up -d
 ```
 
@@ -66,8 +66,8 @@ docker-compose \
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   ps
 ```
 
@@ -75,8 +75,8 @@ docker-compose \
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   exec coding_agent bash
 ```
 
@@ -84,8 +84,8 @@ docker-compose \
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   down
 ```
 

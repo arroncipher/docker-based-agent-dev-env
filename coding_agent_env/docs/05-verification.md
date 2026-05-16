@@ -15,8 +15,8 @@ bash -n scripts/*.sh
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   config
 ```
 
@@ -50,15 +50,15 @@ scripts/host-build-base-image.sh
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   up -d
 ```
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   ps
 ```
 
@@ -68,8 +68,8 @@ docker-compose \
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   exec coding_agent bash -lc '
 pwd
 whoami
@@ -94,8 +94,8 @@ mount | grep -E "(/data/work_dir|authorized_keys)"
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   exec coding_agent bash -lc '
 node --version
 npm --version
@@ -125,8 +125,8 @@ ssh \
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   exec coding_agent bash -lc '
 dig @172.19.0.1 github.com A +time=8 +tries=2 >/dev/null && echo dns_github:ok
 dig @172.19.0.1 www.google.com A +time=8 +tries=2 >/dev/null && echo dns_google:ok
@@ -140,8 +140,8 @@ ip addr show tun0 | sed -n "1,3p"
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   logs --no-color --tail=120 sing_box_gateway
 ```
 
@@ -155,8 +155,8 @@ docker-compose \
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   kill -s HUP sing_box_gateway
 ```
 
@@ -164,8 +164,8 @@ docker-compose \
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   logs --no-color --tail=40 sing_box_gateway
 ```
 
@@ -173,8 +173,8 @@ docker-compose \
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   exec coding_agent bash -lc '
 ip -4 addr show tun0
 echo "---"
@@ -196,8 +196,8 @@ ip route | grep -E "tun0|default" | head -20
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   exec coding_agent bash -lc '
 cat /etc/resolv.conf | grep nameserver
 dig +short +time=4 +tries=1 github.com
@@ -218,8 +218,8 @@ dig @172.19.0.1 +short +time=4 +tries=1 github.com
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   exec coding_agent bash -lc '
 for d in www.qq.com github.com www.google.com; do
   echo -n "$d "
@@ -234,8 +234,8 @@ done 2>&1
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   exec coding_agent bash -lc '
 curl -sS --max-time 8 https://api.ipify.org && echo
 curl -sS --max-time 8 https://www.qq.com    -o /dev/null -w "qq:%{http_code} ip=%{remote_ip} t=%{time_total}\n"
@@ -265,8 +265,8 @@ lsof -iTCP:7897 -sTCP:ESTABLISHED -n -P 2>/dev/null | head
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   exec coding_agent getent hosts host.docker.internal
 ```
 
@@ -276,8 +276,8 @@ docker-compose \
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   exec coding_agent sh -c 'awk "NR==1 || \$2 ~ /:0035\$/" /proc/net/udp'
 ```
 
@@ -289,8 +289,8 @@ docker-compose \
 
 ```bash
 docker-compose \
-  --env-file compose/coding-agent/coding-agent.env \
-  -f compose/coding-agent/docker-compose.sing-box.yml \
+  --env-file coding_agent_env/compose/coding-agent/coding-agent.env \
+  -f coding_agent_env/compose/coding-agent/docker-compose.sing-box.yml \
   exec coding_agent bash -lc '
 ip rule
 echo "---"
