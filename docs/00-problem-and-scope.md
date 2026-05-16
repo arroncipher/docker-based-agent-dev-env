@@ -1,5 +1,7 @@
 # 问题定义与范围
 
+> 本文档是仓库子项目 1 「Docker 账户环境搭建」的 scope 文档（umbrella: `00-projects.md`）。
+
 ## 目标
 
 本仓库提供一套本地 coding-agent Docker 开发环境，用于让 Claude、Codex、Gemini 等工具在稳定、可复现、可审查的容器环境中处理多个 ticket/repo。
@@ -42,3 +44,7 @@
 ## 风险与控制
 
 高风险操作包括修改 Dockerfile、Compose、工具登录状态、生产配置、网络代理、SSH、TUN 配置、大量删除文件或运行未知脚本。这类操作需要先明确影响范围，再执行可回滚的最小变更。
+
+## 完成判据
+
+TBD。本子项目当前为 ongoing；完成语义未定义。候选方向（待选定后写入此节）：MVP 完成（多账号 + 网络 + VS Code 接入在最新 Docker Desktop 版本上稳定通过烟测）/ 里程碑完成（按 `docs/05-verification.md` 全部检查项通过即视为当前迭代闭环）/ 退役条件（更优容器/沙箱方案替代）。

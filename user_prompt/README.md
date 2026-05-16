@@ -1,5 +1,7 @@
 # user_prompt · Agent 配置派生
 
+> 本目录是仓库子项目 2 「用户提示词搭建」的 scope 文档（umbrella: `../docs/00-projects.md`）。完成判据见 §18。
+
 Arron 用户级 agent 配置的单一真相源，以及将其编译为各 agent 文件的派生 prompt。
 
 派生流程通过 wrapper 脚本（`claude_max20.sh` / `codex_plus.sh`）在隔离 session 中执行（见 §8–§9），
@@ -815,3 +817,12 @@ Codex 全局入口（`AGENTS.md`）和三个 profiles 已部署到所有 Codex �
 
 `codex_arron_free` 的旧 profiles（`agentic-engineering.md`、`concept-learning.md`、`product.md`）
 已于 2026-05-13 删除，当前 `.codex/profiles/` 仅保留三个 spec-derived profiles。
+
+---
+
+## 18. 完成判据
+
+TBD。本子项目当前为 ongoing；完成语义未定义。候选方向（待选定后写入此节）：
+- **MVP 完成**：4 个 Claude 账号 + 2 个 Codex 账号在最新模型版本上行为门控全 PASS，且 spec 30 天内无新增规则。
+- **里程碑完成**：`TODO.md` 无 open 缺口即视为当前迭代闭环；项目本身持续运行。
+- **退役条件**：harness 平台原生支持多账号 spec 编译，本派生 pipeline 可归档。
