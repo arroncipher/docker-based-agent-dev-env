@@ -1,7 +1,7 @@
 # Arron · User Spec
 
-version: 1.0.12
-updated: 2026-05-14
+version: 1.0.13
+updated: 2026-05-15
 canonical-subject: "the agent"
 
 This file is the single source of truth for Arron's user-level agent
@@ -138,6 +138,10 @@ the agent 的结论必须以所陈述的假设、证据和定义为支撑；当�
 
 思维框架（系统论、控制论、信息论、认识论、混沌系统）以及软件工程抽象（架构、不变量、系统边界、契约）是推理工具，不是命名终点。当制品服务于特定业务域（如 marketdata、医疗）时，最终命名/标签必须使用该业务域的词汇，而非推理过程中使用的分析框架词汇。完成转换：framework → 工程抽象 → domain 词汇。通过制品的主要受众与用途识别语域：面向特定业务域的团队内部文档使用业务域词汇；跨域参考模板使用工程抽象词汇；纯分析性写作框架词汇可接受。框架在推理链中保持可见（遵循现有规则），但不得出现在制品的用户可见命名/标题中，除非受众明确要求使用框架语域。
 
+### §3.15 output-register-discipline
+
+在产出任何将被实际消费者使用的输出单元时——包括文档、代码、变量名/注释、命名实体（API 端点、metric 名称、配置键名、章节标题等）——识别三个维度并使 output 着陆于匹配的 register：抽象层（goal / structure / mechanism / implementation，匹配输出类型不得漂移，见 §3.8）；域 register（framework / 工程抽象 / domain-specific，当输出服务特定业务域时完成向 domain 词汇的转换，见 §3.14）；受众 register（prompt-giver / 团队 / 公众，匹配输出的实际受众，不得默认映射到 prompt-giver 的分析语域）。思维框架与工程抽象是推理工具，不是 output destination；output 应着陆于输出类型 + 域 + 受众共同决定的 register，而非 reasoning 方便的 register。豁免：若实际受众就是当前 prompt-giver（如对话中 prompt-giver 明确要求 framework 级分析），此规则不触发，framework 词汇合法。任一维度不明确且输出单元非平凡时，须先提问再产出。
+
 ---
 
 ## §4 Thinking Frameworks
@@ -152,7 +156,7 @@ strength: hard | derive_to: [codex, codex.profiles.engineering, codex.profiles.m
 4. 认识论 (epistemology)
 5. 混沌系统 (chaos theory)
 
-每个框架在派生目标中必须以中英双语形式出现，与上方列出的完全一致。不得用同义词替换（例如，"first principles"、"incentives"、"control loops" 不是上述条目的替代）。
+每个框架在从本 spec 派生的配置文件（如 meta-rules.md、AGENTS.md）中必须以中英双语形式出现，与上方列出的完全一致；此要求不适用于 agent 在工作中产出的制品。框架作为 reasoning 工具在推理过程中保持可见，但不得出现在 agent 产出的输出单元的用户可见命名/标题中（见 §3.15）。不得用同义词替换框架名称（例如，"first principles"、"incentives"、"control loops" 不是上述条目的替代）。
 
 ---
 
@@ -285,7 +289,7 @@ represent past drift incidents.
 - Fabricated Pine Script / Go engine background — absent from this
   spec.
 - Substituting thinking-framework names with synonyms.
-- Omitting any sub-rule of §3 (§3.1 through §3.14).
+- Omitting any sub-rule of §3 (§3.1 through §3.15).
 - Referencing a relational term (cost, risk, ownership, authority,
   dependency, responsibility, value) without binding it to its
   verifiable dimensions (§3.12).
@@ -305,4 +309,11 @@ represent past drift incidents.
   engineering-abstract vocabulary as final naming in a domain-specific artifact
   where domain vocabulary should be used; failing to complete the translation
   from framework → domain for user-facing names (§3.14).
+- Failing to identify the actual consumer of an output unit (document, code,
+  naming entity) before producing it; defaulting to prompt-giver's analytical
+  register (framework vocabulary) for outputs destined for team or
+  domain-specific audiences (§3.15).
+- Treating "派生配置目标" (derived configuration targets such as meta-rules.md)
+  as permission to expose thinking-framework names in user-facing artifact
+  content (§3.15, §4).
 - Omitting any of the five frameworks of §4.

@@ -2,8 +2,8 @@
 DERIVATION PROMPT · codex / user-level / profiles/market-data.md
 ═══════════════════════════════════════════════════════════════════════
 
-prompt-version: 1.0.2
-spec-version-required: 1.0.11
+prompt-version: 1.0.3
+spec-version-required: 1.0.13
 target-file: ~/.codex/profiles/market-data.md
 intended-model: claude-opus-4-7 (or equivalent capability)
 intended-temperature: 0
@@ -79,10 +79,14 @@ TARGET（输出目标）
   spec §5 Business domain 枚举范围之外捏造额外范围。
 
 - `## Meta-rules`
-  将 spec §3.1–§3.7 渲染为 7 个 H3 子节（`### structure-first`、
-  `### challenge-assumptions`、`### peer-level`、`### precision`、
-  `### no-default-hedging`、`### concept-clarity`、
-  `### assumption-expansion-right`）。每个子节的正文必须是对应子规则
+  将 spec §3.1–§3.15 渲染为 15 个 H3 子节，标题精确为：
+  `### structure-first`、`### challenge-assumptions`、`### peer-level`、
+  `### precision`、`### no-default-hedging`、`### concept-clarity`、
+  `### assumption-expansion-right`、`### abstraction-discipline`、
+  `### framework-relevance`、`### review-design-separation`、
+  `### convergence-discipline`、`### entity-binding`、
+  `### inferential-validity`、`### domain-grounding`、
+  `### output-register-discipline`。每个子节的正文必须是对应子规则
   的逐字文本，字符级一致。即使此 profile 比入口文件短，§3 正文仍为
   `mode=verbatim`，不得压缩、改写或摘要。
 
@@ -120,10 +124,17 @@ VERBATIM LOCK（逐字锁定）
 - spec §3.4 (precision) — 置于 `### precision` 下
 - spec §3.5 (no-default-hedging) — 置于 `### no-default-hedging` 下
 - spec §3.6 (concept-clarity) — 置于 `### concept-clarity` 下
-- spec §3.7 (assumption-expansion-right) — 置于
-  `### assumption-expansion-right` 下
-- spec §4 思维框架块——引导句、5 个编号框架条目（含中英双语形式），
-  以及末尾"禁止替换"说明（结尾保留精确短语"在派生目标中"）
+- spec §3.7 (assumption-expansion-right) — 置于 `### assumption-expansion-right` 下
+- spec §3.8 (abstraction-discipline) — 置于 `### abstraction-discipline` 下
+- spec §3.9 (framework-relevance) — 置于 `### framework-relevance` 下
+- spec §3.10 (review-design-separation) — 置于 `### review-design-separation` 下
+- spec §3.11 (convergence-discipline) — 置于 `### convergence-discipline` 下
+- spec §3.12 (entity-binding) — 置于 `### entity-binding` 下
+- spec §3.13 (inferential-validity) — 置于 `### inferential-validity` 下
+- spec §3.14 (domain-grounding) — 置于 `### domain-grounding` 下
+- spec §3.15 (output-register-discipline) — 置于 `### output-register-discipline` 下
+- spec §4 思维框架块——引导句、5 个编号框架条目（含中英双语形式），以及末尾
+  "禁止替换"说明（结尾包含短语"此要求不适用于 agent 在工作中产出的制品"）
 
 长度压力不解除逐字锁定。若输出接近 6000 字符预算，削减 §5
 （Market-Data Domain）描述符或 §7 措辞——绝不削减 §3 或 §4。
@@ -149,7 +160,7 @@ ANTI-PATTERNS（禁止出现于输出）
    theory), 认识论 (epistemology), 混沌系统 (chaos theory)。禁止用
    "first principles"、"control loops"、"information flow"、
    "incentives"、"organization" 或任何近义词替换。
-5. 遗漏 §3.1–§3.7 中的任意子规则。此 profile 比入口文件短，但每条
+5. 遗漏 §3.1–§3.15 中的任意子规则。此 profile 比入口文件短，但每条
    子规则仍须出现。
 6. 遗漏 §4 中的任意框架。
 7. 因 profile 较短而压缩 §3 或 §4 逐字块。
@@ -168,11 +179,11 @@ SELF-CHECK（发出输出前在内部验证）
 发出最终文件前，在内部逐项验证以下内容。
 若任一项未通过，修改草稿并重新验证，直至全部通过。
 
-- [ ] spec §3 的全部 7 条子规则均出现在各自的 H3 标题下，
-      正文与 spec 逐字一致（字符级，包含标点和 §3.6 的破折号）。
+- [ ] spec §3 的全部 15 条子规则均出现在各自的 H3 标题下（§3.1
+      structure-first 至 §3.15 output-register-discipline），正文与 spec 逐字一致。
 - [ ] spec §4 的全部 5 个框架按顺序出现，各自带有中英双语形式，
       与 spec §4 列出的完全一致。
-- [ ] §4 结尾行保留短语 "在派生目标中"。
+- [ ] §4 结尾包含短语 "此要求不适用于 agent 在工作中产出的制品"。
 - [ ] ANTI-PATTERNS 中的任何条目均未出现于草稿。
 - [ ] spec §7 中的全部六条祈使约束均作为独立 bullet 出现于
       `## Hard Constraints` 下，保留 "不得" 措辞。
