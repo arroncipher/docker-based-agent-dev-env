@@ -583,6 +583,30 @@ deterministic 编译 → Phase G audit PASS (~4250 chars / 5000 budget) →
 
 ---
 
+### v1.0.13 · 2026-05-15 · 新增 §3.15 output-register-discipline + 修正 §4 closing clause
+
+**触发**：诊断发现 Thinking Frameworks "每个框架在派生目标中必须以中英双语形式出现" 条款被 agent 误读为"制品中必须出现框架名称"，联合 peer-level 默认映射到 prompt-giver 语域（而非制品实际受众）和 concept-clarity 对 framework 术语的系统性偏向，导致框架词汇渗透进面向团队的输出单元（文档、代码注释、命名实体等）。与 §3.8/§3.14 共享同一深层缺位：reasoning 工具 ≠ output destination；§3.15 管受众维度。
+
+**变更**：
+- spec §3.15 `output-register-discipline`（strength: hard, mode: verbatim）：在产出任何将被实际消费者使用的输出单元时（含文档、代码、变量名/注释、命名实体），识别三维度（抽象层 / 域 register / 受众 register）并着陆于匹配 register；豁免仅限实际受众就是 prompt-giver 的场景
+- spec §4 closing clause 修正："派生目标" 明确为派生配置文件（meta-rules.md、AGENTS.md），不适用于 agent 工作中产出的制品；显式声明框架不得出现在 agent 产出的输出单元用户可见命名/标题中
+- spec §9 anti-patterns 追加 2 条（§3.15 对应失效模式）；sub-rule range 升至 §3.1–§3.15
+
+**提示词变更**：
+- `claude.rules.meta-rules.md.prompt` v1.0.6：`spec-version-required: 1.0.13`；§3.15 加入 H3 列表、VERBATIM LOCK、SELF-CHECK；ANTI-PATTERNS 范围升至 §3.1–§3.15；SELF-CHECK §4 anchor phrase 更新
+
+**处理方式**：spec v1.0.13 + `claude.rules.meta-rules.md.prompt` v1.0.6 → fresh-session replay → Phase G audit PASS (2667 chars / 5000 budget) → 4 个 Claude 账号 promote（`b39cd2a4…` 5942B 均一致）。
+
+**Codex 同步（2026-05-15）**：4 个 Codex prompts v1.0.3（spec-version-required: 1.0.13）→
+fresh-session replay → Phase G audit 全 PASS（education 软偏差：6478 chars / 6000 budget，
+因 §3.8–§3.15 内容扩展所致）→ 2 个 Codex 账号 promote（hash 两账号一致）：
+- AGENTS.md: `26ad4cd7…` 9887B
+- profiles/engineering.md: `0e9c8fba…` 8577B
+- profiles/market-data.md: `7f7588f6…` 7297B
+- profiles/education.md: `cf51721c…` 10169B
+
+---
+
 ## 不在本计划内的事
 
 - 不做 prompt 模板抽象（`prompts/_shared.md`）——5 份 prompt 抽象成本高于复制成本。
