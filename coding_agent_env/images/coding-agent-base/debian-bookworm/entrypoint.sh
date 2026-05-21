@@ -12,7 +12,7 @@ fi
 
 # OrbStack DNS (127.0.0.11) unreachable from shared network namespace.
 # Point to sing-box gateway tun0 IP where hijack-dns intercepts DNS queries.
-printf 'nameserver 172.19.0.1\noptions timeout:1 attempts:1\n' | sudo tee /etc/resolv.conf >/dev/null
+printf 'nameserver 172.19.0.1\noptions timeout:3 attempts:2\n' | sudo tee /etc/resolv.conf >/dev/null
 
 # Add scripts to PATH
 [ -f /data/work_dir/dev_env/scripts/setup-shell-env.sh ] && bash /data/work_dir/dev_env/scripts/setup-shell-env.sh
