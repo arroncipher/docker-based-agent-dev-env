@@ -1,7 +1,6 @@
 .coding_agents/
-scripts/ssh/
-.claude/settings.local.json
-user_prompt/runs/
-scripts/plugins_usage.sh
-arron.md
 .ssh
+.claude/settings.local.json
+scripts/ssh/
+user_prompt/runs/
+user_prompt/arron.md
