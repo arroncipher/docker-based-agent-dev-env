@@ -21,12 +21,23 @@
         "server": "223.5.5.5",
         "server_port": 443,
         "path": "/dns-query"
+      },
+      {
+        "type": "udp",
+        "tag": "corp-dns",
+        "server": "10.9.0.1",
+        "server_port": 53
       }
     ],
     "rules": [
       {
         "domain_suffix": [
-          "myhexin.com",
+          "myhexin.com"
+        ],
+        "server": "corp-dns"
+      },
+      {
+        "domain_suffix": [
           "qq.com"
         ],
         "server": "direct-doh"
@@ -112,7 +123,12 @@
       {
         "domain": [
           "localhost",
-          "host.docker.internal",
+          "host.docker.internal"
+        ],
+        "outbound": "direct"
+      },
+      {
+        "domain_suffix": [
           "myhexin.com",
           "qq.com"
         ],
